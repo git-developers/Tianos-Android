@@ -8,14 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.software.activity.father.modules.ModuleNoticeFatherActivity;
-import com.example.software.activity.father.modules.ModuleAttendanceFatherActivity;
-import com.example.software.activity.father.modules.ModuleGradesFatherActivity;
-import com.example.software.activity.father.modules.ModuleTaskFatherListActivity;
-import com.example.software.activity.teacher.modules.ModuleAttendanceTeacherActivity;
-import com.example.software.activity.teacher.modules.ModuleGradesBimesterActivity;
-import com.example.software.activity.teacher.modules.ModuleNoticeTeacherActivity;
-import com.example.software.activity.teacher.modules.ModuleTaskTeacherActivity;
 import com.example.software.adapter.ModulesAdapter;
 import com.example.software.controller.ModulesController;
 import com.example.software.entity.Modules;
@@ -76,6 +68,7 @@ public class ModulesSeleccionActivity extends BaseActivity {
         switch (id){
             case Const.ACTIVITY_MODULE_NOTICE_TEACHER:
 
+                /*
                 switch (user.getRole()){
                     case Const.ROLE_FATHER:
                         intent.setClass(ModulesSeleccionActivity.this, ModuleNoticeFatherActivity.class);
@@ -84,10 +77,12 @@ public class ModulesSeleccionActivity extends BaseActivity {
                         intent.setClass(ModulesSeleccionActivity.this, ModuleNoticeTeacherActivity.class);
                         break;
                 }
+                */
 
                 break;
             case Const.ACTIVITY_MODULE_ATTENDANCE:
 
+                /*
                 switch (user.getRole()){
                     case Const.ROLE_FATHER:
                         intent.setClass(ModulesSeleccionActivity.this, ModuleAttendanceFatherActivity.class);
@@ -96,10 +91,12 @@ public class ModulesSeleccionActivity extends BaseActivity {
                         intent.setClass(ModulesSeleccionActivity.this, ModuleAttendanceTeacherActivity.class);
                         break;
                 }
+                */
 
                 break;
             case Const.ACTIVITY_MODULE_GRADES:
 
+                /*
                 switch (user.getRole()){
                     case Const.ROLE_FATHER:
                         intent.setClass(ModulesSeleccionActivity.this, ModuleGradesFatherActivity.class);
@@ -108,10 +105,12 @@ public class ModulesSeleccionActivity extends BaseActivity {
                         intent.setClass(ModulesSeleccionActivity.this, ModuleGradesBimesterActivity.class);
                         break;
                 }
+                */
 
                 break;
             case Const.ACTIVITY_MODULE_TASK:
 
+                /*
                 switch (user.getRole()){
                     case Const.ROLE_FATHER:
                         intent.setClass(ModulesSeleccionActivity.this, ModuleTaskFatherListActivity.class);
@@ -120,10 +119,11 @@ public class ModulesSeleccionActivity extends BaseActivity {
                         intent.setClass(ModulesSeleccionActivity.this, ModuleTaskTeacherActivity.class);
                         break;
                 }
+                */
 
                 break;
             default:
-                intent.setClass(ModulesSeleccionActivity.this, ModuleGradesBimesterActivity.class);
+//                intent.setClass(ModulesSeleccionActivity.this, ModuleGradesBimesterActivity.class);
                 break;
         }
 

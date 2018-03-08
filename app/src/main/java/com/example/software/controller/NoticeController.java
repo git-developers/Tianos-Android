@@ -2,8 +2,6 @@ package com.example.software.controller;
 
 import android.content.Context;
 
-import com.example.software.dao.implement.CoursesDaoImplement;
-import com.example.software.entity.Courses;
 import com.example.software.entity.Notice;
 import com.example.software.utils.Const;
 import com.example.software.utils.Utils;
@@ -11,22 +9,20 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
 
 public class NoticeController extends BaseController {
 
     private static final String TAG = "NoticeController";
     private Context context;
-//    private CoursesDaoImplement dao;
+//    private PointOfSaleDaoImplement dao;
 
     public NoticeController(Context context) {
         this.context = context;
-//        this.dao = new CoursesDaoImplement(this.context);
+//        this.dao = new PointOfSaleDaoImplement(this.context);
     }
 
     public List<Notice> parseJsonToArrayObject(JSONObject jsonOutput) {

@@ -22,8 +22,8 @@ public class ModulesDaoImplement extends dbConnection implements ISemester {
     public long insertSemester(String username, Semester semester) {
         ContentValues values = new ContentValues();
         values.put(dbTables.USERNAME, username);
-        values.put(dbTables.T_SEMESTER_ID, semester.getId());
-        values.put(dbTables.T_SEMESTER_NAME, semester.getName());
+        values.put(dbTables.ID, semester.getId());
+        values.put(dbTables.NAME, semester.getName());
         return this.getSqliteDb().insert(dbTables.T_SEMESTER, null, values);
     }
 
@@ -32,10 +32,10 @@ public class ModulesDaoImplement extends dbConnection implements ISemester {
         Cursor cursor = null;
 
         try {
-            cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_SEMESTER + " ORDER BY " + dbTables.ID_INCREMENT + " DESC LIMIT 1", null);
+            cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_SEMESTER + " ORDER BY " + dbTables.ID + " DESC LIMIT 1", null);
             while (cursor.moveToNext()) {
-                semester.setId(cursor.getInt(cursor.getColumnIndex(dbTables.T_SEMESTER_ID)));
-                semester.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_SEMESTER_NAME)));
+                semester.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
+                semester.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
             }
         } finally {
             if (cursor != null) {

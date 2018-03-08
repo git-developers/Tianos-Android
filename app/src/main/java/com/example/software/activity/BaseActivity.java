@@ -26,20 +26,6 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.software.activity.father.CoursesByUserActivity;
-import com.example.software.activity.father.ListChildrenActivity;
-import com.example.software.activity.father.modules.ModuleNoticeFatherActivity;
-import com.example.software.activity.father.ReportsActivity;
-import com.example.software.activity.father.modules.ModuleAttendanceFatherDayActivity;
-import com.example.software.activity.father.modules.ModuleGradesFatherActivity;
-import com.example.software.activity.father.modules.ModuleTaskFatherListActivity;
-import com.example.software.activity.teacher.CoursesActivity;
-import com.example.software.activity.teacher.modules.ModuleAttendanceTeacherActivity;
-import com.example.software.activity.teacher.modules.ModuleGradesEnterGradeActivity;
-import com.example.software.activity.teacher.modules.ModuleGradesListStudentsActivity;
-import com.example.software.activity.teacher.modules.ModuleNoticeTeacherActivity;
-import com.example.software.activity.teacher.modules.ModuleTaskTeacherFormActivity;
-import com.example.software.activity.teacher.modules.ModuleTaskTeacherListActivity;
 import com.example.software.controller.UserController;
 import com.example.software.entity.User;
 import com.example.software.utils.Const;
@@ -199,7 +185,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void gotoCourses() {
         Intent intent = new Intent();
-        intent.setClass(BaseActivity.this, CoursesActivity.class);
+//        intent.setClass(BaseActivity.this, CoursesActivity.class);
         startActivity(intent);
         BaseActivity.this.finish();
 
@@ -209,7 +195,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void gotoListChildren() {
         Intent intent = new Intent();
-        intent.setClass(BaseActivity.this, ListChildrenActivity.class);
+        intent.setClass(BaseActivity.this, ListPointOfSaleActivity.class);
         startActivity(intent);
         BaseActivity.this.finish();
 
@@ -219,7 +205,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void gotoReports() {
         Intent intent = new Intent();
-        intent.setClass(BaseActivity.this, ReportsActivity.class);
+//        intent.setClass(BaseActivity.this, ReportsActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putString(Const.BUNDLE_ROUTE, Const.ROUTE_REPORTS_PIECHART);
@@ -330,48 +316,18 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                         case Const.ACTIVITY_LOGIN:
                         ((LoginActivity)context).handleOnResponse(response);
                             break;
-                        case Const.ACTIVITY_COURSES:
-                        ((CoursesActivity)context).handleOnResponse(response);
+                        case Const.ACTIVITY_LIST_POINT_OF_SALE:
+                        ((ListPointOfSaleActivity)context).handleOnResponse(response);
                             break;
-                        case Const.ACTIVITY_MODULE_NOTICE_TEACHER:
-                        ((ModuleNoticeTeacherActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_GRADES_LIST_STUDENTS:
-                        ((ModuleGradesListStudentsActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_GRADES_CREATE:
-                        ((ModuleGradesEnterGradeActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_ATTENDANCE:
-                        ((ModuleAttendanceTeacherActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_ATTENDANCE_CREATE:
-                        ((ModuleAttendanceTeacherActivity)context).handleOnResponseList(response);
-                            break;
-                        case Const.ACTIVITY_LIST_CHILDREN:
-                        ((ListChildrenActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_COURSES_BY_USER:
-                        ((CoursesByUserActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_NOTICE_FATHER:
-                        ((ModuleNoticeFatherActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_GRADES_FATHER:
-                        ((ModuleGradesFatherActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_ATTENDANCE_STATUS:
-                        ((ModuleAttendanceFatherDayActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_TASK_CREATE:
-                        ((ModuleTaskTeacherFormActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_TASK_TEACHER_LIST:
-                        ((ModuleTaskTeacherListActivity)context).handleOnResponse(response);
-                            break;
-                        case Const.ACTIVITY_MODULE_TASK_FATHER_LIST:
-                        ((ModuleTaskFatherListActivity)context).handleOnResponse(response);
-                            break;
+//                        case Const.ACTIVITY_MODULE_NOTICE_TEACHER:
+//                        ((ModuleNoticeTeacherActivity)context).handleOnResponse(response);
+//                            break;
+//                        case Const.ACTIVITY_MODULE_GRADES_LIST_STUDENTS:
+//                        ((ModuleGradesListStudentsActivity)context).handleOnResponse(response);
+//                            break;
+//                        case Const.ACTIVITY_MODULE_GRADES_CREATE:
+//                        ((ModuleGradesEnterGradeActivity)context).handleOnResponse(response);
+//                            break;
                     }
 
                     showProgress(false);

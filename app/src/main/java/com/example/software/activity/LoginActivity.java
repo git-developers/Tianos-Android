@@ -16,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +28,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.software.activity.father.ListChildrenActivity;
 import com.example.software.activity.implement.IBase;
-import com.example.software.activity.teacher.CoursesActivity;
 import com.example.software.entity.User;
 import com.example.software.entity.WsResponse;
 import com.example.software.utils.Const;
@@ -293,9 +290,12 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
                             Intent intent = new Intent();
 
+                            intent.setClass(LoginActivity.this, ListPointOfSaleActivity.class);
+
+                            /*
                             switch (user.getRole()){
                                 case Const.ROLE_FATHER:
-                                    intent.setClass(LoginActivity.this, ListChildrenActivity.class);
+                                    intent.setClass(LoginActivity.this, ListPointOfSaleActivity.class);
                                     break;
                                 case Const.ROLE_TEACHER:
                                     intent.setClass(LoginActivity.this, CoursesActivity.class);
@@ -304,13 +304,18 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                                     Utils.shortToast(LoginActivity.this, "El usuario no tiene un rol");
                                     break;
                             }
+                            */
 
                             startActivity(intent);
 //                            LoginActivity.this.finish();
 
                             /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
                             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        }else{
+                            Utils.shortToast(LoginActivity.this, "idInserted > 0");
                         }
+                    }else{
+                        Utils.shortToast(LoginActivity.this, "user != null");
                     }
                 }else{
                     Utils.shortToast(LoginActivity.this, response.getMessage());

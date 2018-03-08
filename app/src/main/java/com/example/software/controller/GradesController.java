@@ -3,7 +3,6 @@ package com.example.software.controller;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.software.dao.implement.CoursesDaoImplement;
 import com.example.software.entity.Courses;
 import com.example.software.entity.Grades;
 import com.example.software.entity.Semester;
@@ -14,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;

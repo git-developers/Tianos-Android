@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.software.activity.R;
-import com.example.software.entity.User;
+import com.example.software.entity.PointOfSale;
 import com.example.software.utils.Utils;
 
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.List;
  * Created by jafeth on 3/31/17.
  */
 
-public class StudentsAdapter extends BaseAdapter {
+public class PointOfSaleAdapter extends BaseAdapter {
 
-    private List<User> listData;
+    private List<PointOfSale> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public StudentsAdapter(Context aContext, List<User> listData) {
+    public PointOfSaleAdapter(Context aContext, List<PointOfSale> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -59,11 +59,11 @@ public class StudentsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        User user = this.listData.get(position);
-        holder.studentNameView.setText(user.getName());
-        holder.itemView.setText("item: " + user.getUsername());
+        PointOfSale pos = this.listData.get(position);
+        holder.studentNameView.setText(pos.getName());
+        holder.itemView.setText("pos: " + pos.getId());
 
-        int imageId = Utils.getResourceIdByName(context, user.getImage(), "drawable");
+        int imageId = Utils.getResourceIdByName(context, pos.getImage(), "drawable");
         holder.userImageView.setImageResource(imageId);
 
         return convertView;

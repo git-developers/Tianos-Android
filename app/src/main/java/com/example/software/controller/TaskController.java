@@ -19,11 +19,11 @@ public class TaskController extends BaseController {
 
     private static final String TAG = "TaskController";
     private Context context;
-//    private CoursesDaoImplement dao;
+//    private PointOfSaleDaoImplement dao;
 
     public TaskController(Context context) {
         this.context = context;
-//        this.dao = new CoursesDaoImplement(this.context);
+//        this.dao = new PointOfSaleDaoImplement(this.context);
     }
 
     public List<Task> parseJsonToArrayObject(JSONObject jsonOutput) {

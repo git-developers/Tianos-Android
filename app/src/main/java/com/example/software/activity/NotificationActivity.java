@@ -3,8 +3,6 @@ package com.example.software.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.software.activity.father.ListChildrenActivity;
-import com.example.software.activity.teacher.CoursesActivity;
 import com.example.software.utils.Const;
 import com.example.software.utils.Utils;
 
@@ -47,10 +45,10 @@ public class NotificationActivity extends BaseActivity {
 
         switch (user.getRole()){
             case Const.ROLE_FATHER:
-                intent.setClass(NotificationActivity.this, ListChildrenActivity.class);
+                intent.setClass(NotificationActivity.this, ListPointOfSaleActivity.class);
                 break;
             case Const.ROLE_TEACHER:
-                intent.setClass(NotificationActivity.this, CoursesActivity.class);
+//                intent.setClass(NotificationActivity.this, CoursesActivity.class);
                 break;
             default:
                 Utils.shortToast(NotificationActivity.this, "El usuario no tiene un rol");

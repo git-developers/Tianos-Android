@@ -29,10 +29,11 @@ public class UserDaoImplement extends dbConnection implements IUser {
 
         ContentValues values = new ContentValues();
         values.put(dbTables.USERNAME, user.getUsername());
-        values.put(dbTables.T_USER_NAME, user.getName());
+        values.put(dbTables.NAME, user.getName());
+        values.put(dbTables.T_USER_LAST_NAME, user.getLast_name());
         values.put(dbTables.T_USER_EMAIL, user.getEmail());
         values.put(dbTables.T_USER_ROLE, user.getRole());
-        values.put(dbTables.T_USER_INSERT_TYPE, user.getInsertType());
+//        values.put(dbTables.T_USER_INSERT_TYPE, user.getInsertType());
 //        values.put(dbTables.T_USER_ROLE, user.getProfile().getPermission().getAlias());
 //        Integer.valueOf(usuario.getPrivilegios())
         return this.getSqliteDb().insert(dbTables.T_USER, null, values);
@@ -46,7 +47,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
             cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE id_increment=" + id, null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_NAME)));
+                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
             }
         } finally {
             if (cursor != null) {
@@ -65,7 +66,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
             cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE " + dbTables.USERNAME + "='" + username + "' LIMIT 1", null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_NAME)));
+                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }
@@ -85,12 +86,12 @@ public class UserDaoImplement extends dbConnection implements IUser {
         try {
             cursor = this.getSqliteDb().rawQuery(
                     " SELECT * FROM " + dbTables.T_USER +
-                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_LOGIN + "' " +
-                    " ORDER BY " + dbTables.ID_INCREMENT +
+//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_LOGIN + "' " +
+                    " ORDER BY " + dbTables.ID +
                     " DESC LIMIT 1", null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_NAME)));
+                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }
@@ -108,14 +109,14 @@ public class UserDaoImplement extends dbConnection implements IUser {
         Cursor cursor = null;
 
         try {
-            cursor = this.getSqliteDb().rawQuery(
-                    " SELECT * FROM " + dbTables.T_USER +
-                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_SELECTED_STUDENT + "' " +
-                    " ORDER BY " + dbTables.ID_INCREMENT +
-                    " DESC LIMIT 1", null);
+//            cursor = this.getSqliteDb().rawQuery(
+//                    " SELECT * FROM " + dbTables.T_USER +
+//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_SELECTED_STUDENT + "' " +
+//                    " ORDER BY " + dbTables.ID_INCREMENT +
+//                    " DESC LIMIT 1", null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_NAME)));
+                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }
@@ -133,14 +134,14 @@ public class UserDaoImplement extends dbConnection implements IUser {
         Cursor cursor = null;
 
         try {
-            cursor = this.getSqliteDb().rawQuery(
-                    " SELECT * FROM " + dbTables.T_USER +
-                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_CHILDREN + "' " +
-                    " ORDER BY " + dbTables.ID_INCREMENT +
-                    " DESC LIMIT 1", null);
+//            cursor = this.getSqliteDb().rawQuery(
+//                    " SELECT * FROM " + dbTables.T_USER +
+//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_CHILDREN + "' " +
+//                    " ORDER BY " + dbTables.ID_INCREMENT +
+//                    " DESC LIMIT 1", null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_NAME)));
+                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }

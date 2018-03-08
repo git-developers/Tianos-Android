@@ -9,12 +9,12 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
-    public static final String INSERT_TYPE_SELECTED_STUDENT = "insert_type_selected_student";
-    public static final String INSERT_TYPE_CHILDREN = "insert_type_children";
+//    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
+//    public static final String INSERT_TYPE_SELECTED_STUDENT = "insert_type_selected_student";
+//    public static final String INSERT_TYPE_CHILDREN = "insert_type_children";
 
-    @SerializedName("id_increment")
-    private int idIncrement;
+    @SerializedName("id")
+    private int id;
 
     @SerializedName("username")
     private String username;
@@ -25,6 +25,9 @@ public class User implements Serializable {
     @SerializedName("name")
     private String name;
 
+    @SerializedName("last_name")
+    private String last_name;
+
     @SerializedName("email")
     private String email;
 
@@ -34,7 +37,7 @@ public class User implements Serializable {
     @SerializedName("created_at")
     private String createdAt;
 
-    @SerializedName("active")
+    @SerializedName("isActive")
     private boolean active;
 
     @SerializedName("profile")
@@ -59,12 +62,12 @@ public class User implements Serializable {
         this.active= true;
     }
 
-    public int getIdIncrement() {
-        return idIncrement;
+    public int getId() {
+        return id;
     }
 
-    public void setIdIncrement(int idIncrement) {
-        this.idIncrement = idIncrement;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSlug() {
@@ -102,6 +105,14 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {

@@ -1,4 +1,4 @@
-package com.example.software.activity.teacher;
+package com.example.software.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.software.activity.BaseActivity;
-import com.example.software.activity.R;
 import com.example.software.activity.implement.IBase;
-import com.example.software.activity.ModulesSeleccionActivity;
-import com.example.software.adapter.CoursesAdapter;
-import com.example.software.controller.CoursesController;
-import com.example.software.entity.Courses;
+import com.example.software.adapter.PointOfSaleAdapter;
+import com.example.software.controller.PointOfSaleController;
+import com.example.software.controller.UserController;
+import com.example.software.entity.PointOfSale;
+import com.example.software.entity.User;
 import com.example.software.entity.WsResponse;
 import com.example.software.utils.Const;
 import com.example.software.utils.Utils;
@@ -24,31 +23,31 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 
-public class CoursesActivity extends BaseActivity implements IBase {
+public class ListPointOfSaleActivity extends BaseActivity implements IBase {
 
-    private static final String TAG = "CoursesActivity";
+    private static final String TAG = "ListPointOfSaleActivity";
     private ListView listView;
-    private CoursesController coursesController;
-
+    private UserController userController;
+    private PointOfSaleController pointOfSaleController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_courses);
-        toolBar("Cursos", R.string.app_name);
+        setContentView(R.layout.father_list_children);
+        toolBar("Puntos de venta", R.string.app_name);
 
         initialize();
         populateList();
-
     }
 
     private void initialize() {
+        userController = new UserController(this);
+        pointOfSaleController = new PointOfSaleController(this);
         listView = (ListView) findViewById(R.id.listView);
-        coursesController = new CoursesController(CoursesActivity.this);
     }
 
     private void populateList() {
-        HashMap paramsInput = coursesController.wsListCourses(username);
-        webServiceTask(Const.ACTIVITY_COURSES, CoursesActivity.this, Const.ROUTE_COURSES, paramsInput);
+        HashMap paramsInput = userController.wsParamUsername(username);
+        webServiceTask(Const.ACTIVITY_LIST_POINT_OF_SALE, ListPointOfSaleActivity.this, Const.ROUTE_LIST_POINT_OF_SALE, paramsInput);
     }
 
     @Override
@@ -61,9 +60,9 @@ public class CoursesActivity extends BaseActivity implements IBase {
         }
     }
 
-    private void gotoModules() {
+    private void gotoCoursesByUser() {
         Intent intent = new Intent();
-        intent.setClass(CoursesActivity.this, ModulesSeleccionActivity.class);
+//        intent.setClass(ListPointOfSaleActivity.this, CoursesByUserActivity.class);
         startActivity(intent);
 //        CoursesActivity.this.finish();
 
@@ -77,34 +76,39 @@ public class CoursesActivity extends BaseActivity implements IBase {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                WsResponse response = coursesController.parseWsResponse(jsonOutput);
+                WsResponse response = pointOfSaleController.parseWsResponse(jsonOutput);
                 int status = response.getStatus();
 
                 if(status == Const.STATUS_SUCCESS){
-                    List<Courses> listObject = coursesController.parseJsonToArrayObject(jsonOutput);
+                    List<PointOfSale> listObject = pointOfSaleController.parseJsonToArrayObject(jsonOutput);
 
                     if(listObject != null){
 
-                        listView.setAdapter(new CoursesAdapter(CoursesActivity.this, listObject));
+                        listView.setAdapter(new PointOfSaleAdapter(ListPointOfSaleActivity.this, listObject));
 
                         // When the user clicks on the ListItem
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                             @Override
                             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                                Object o = listView.getItemAtPosition(position);
-                                Courses course = (Courses) o;
 
-                                long idInserted = coursesController.insert(username, course);
 
-                                gotoModules();
+                                //TODO JAFETH
+//                                Object o = listView.getItemAtPosition(position);
+//                                User user = (User) o;
+//
+//                                long idInserted = userController.insert(user);
+//
+//                                gotoCoursesByUser();
 
-                                Utils.shortToast(CoursesActivity.this, "Seleccionado:" + " " + course.getName());
+//                                Utils.shortToast(ListPointOfSaleActivity.this, "Seleccionado:" + " " + user.getName());
+                                Utils.shortToast(ListPointOfSaleActivity.this, "Seleccionado: POS");
                             }
                         });
+                    }else{
+                        Utils.shortToast(ListPointOfSaleActivity.this, "NULL listObject");
                     }
                 }else{
-                    Utils.shortToast(CoursesActivity.this, response.getMessage());
+                    Utils.shortToast(ListPointOfSaleActivity.this, response.getMessage());
                 }
             }
         });

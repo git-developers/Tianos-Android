@@ -2,16 +2,10 @@ package com.example.software.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.example.software.activity.father.ListChildrenActivity;
-import com.example.software.activity.teacher.CoursesActivity;
-import com.example.software.utils.Const;
-import com.example.software.utils.Utils;
 
 public class SplashActivity extends BaseActivity {
 
-    private static final int SPLASH_SCREEN_TIMEOUT = 3500;
+    private static final int SPLASH_SCREEN_TIMEOUT = 2000;
     private static final String TAG = "SplashActivity";
 
     @Override
@@ -46,9 +40,13 @@ public class SplashActivity extends BaseActivity {
         boolean isLogged = getSharePreferencesIsLogged();
 
         if(user != null && isLogged){
+
+            intent.setClass(SplashActivity.this, ListPointOfSaleActivity.class);
+
+            /*
             switch (user.getRole()){
                 case Const.ROLE_FATHER:
-                    intent.setClass(SplashActivity.this, ListChildrenActivity.class);
+                    intent.setClass(SplashActivity.this, ListPointOfSaleActivity.class);
                     break;
                 case Const.ROLE_TEACHER:
                     intent.setClass(SplashActivity.this, CoursesActivity.class);
@@ -57,6 +55,7 @@ public class SplashActivity extends BaseActivity {
                     Utils.shortToast(SplashActivity.this, "El usuario no tiene un rol");
                     break;
             }
+            */
         }else{
             intent.setClass(SplashActivity.this, LoginActivity.class);
         }
