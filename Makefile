@@ -20,3 +20,5 @@ adb:
 	sleep 2;
 	adb kill-server
 	adb start-server
+
+
