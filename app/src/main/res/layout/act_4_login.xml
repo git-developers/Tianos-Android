@@ -5,7 +5,7 @@
     android:background="@mipmap/img_480x800_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.example.software.activity.LoginActivity">
+    tools:context="xyz.tianos.software.activity.LoginActivity">
     <!--android:background="@color/colorPrimaryDark"-->
 
     <include

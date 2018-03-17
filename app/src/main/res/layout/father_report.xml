@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="60dp"
-        tools:context="com.example.software.activity.teacher.ListActivity">
+        tools:context="xyz.tianos.software.activity.teacher.ListActivity">
 
         <ProgressBar
             android:id="@+id/progress_bar"

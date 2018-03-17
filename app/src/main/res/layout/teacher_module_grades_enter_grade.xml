@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="56dp"
-        tools:context="com.example.software.activity.teacher.ModuleGradesEnterGradeActivity">
+        tools:context="xyz.tianos.software.activity.teacher.ModuleGradesEnterGradeActivity">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
