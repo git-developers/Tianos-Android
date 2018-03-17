@@ -13,7 +13,6 @@ import xyz.tianos.software.adapter.PointOfSaleAdapter;
 import xyz.tianos.software.controller.PointOfSaleController;
 import xyz.tianos.software.controller.UserController;
 import xyz.tianos.software.entity.PointOfSale;
-import xyz.tianos.software.entity.User;
 import xyz.tianos.software.entity.WsResponse;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
@@ -32,7 +31,7 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.father_list_children);
+        setContentView(R.layout.api);
         toolBar("Puntos de venta", R.string.app_name);
 
         initialize();
@@ -84,6 +83,8 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
 
                     if(listObject != null){
 
+
+                        /*
                         listView.setAdapter(new PointOfSaleAdapter(ListPointOfSaleActivity.this, listObject));
 
                         // When the user clicks on the ListItem
@@ -104,6 +105,7 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
                                 Utils.shortToast(ListPointOfSaleActivity.this, "Seleccionado: POS");
                             }
                         });
+                        */
                     }else{
                         Utils.shortToast(ListPointOfSaleActivity.this, "NULL listObject");
                     }
