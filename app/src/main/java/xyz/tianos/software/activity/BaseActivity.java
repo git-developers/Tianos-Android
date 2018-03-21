@@ -18,14 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+//import com.android.volley.DefaultRetryPolicy;
+//import com.android.volley.Request;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.Response;
+//import com.android.volley.RetryPolicy;
+//import com.android.volley.VolleyError;
+//import com.android.volley.toolbox.JsonObjectRequest;
+//import com.android.volley.toolbox.Volley;
 import xyz.tianos.software.controller.UserController;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.utils.Const;
@@ -295,6 +295,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     /**
      * https://kylewbanks.com/blog/Tutorial-Android-Parsing-JSON-with-GSON
      */
+
+    /*
     public void webServiceTask(final int currentActivity, final Context context, String route, final HashMap params) {
 
         final String TAG = "webServiceTask";
@@ -365,5 +367,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         requestQueue.add(request);
         Log.i(TAG, "**** CONNECT TO WEB SERVICE :: FIN ****");
     }
+    */
 
 }

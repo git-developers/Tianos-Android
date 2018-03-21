@@ -57,7 +57,8 @@ public class SplashActivity extends BaseActivity {
             }
             */
         }else{
-            intent.setClass(SplashActivity.this, LoginActivity.class);
+//            intent.setClass(SplashActivity.this, LoginActivity.class);
+            intent.setClass(SplashActivity.this, ApiActivity.class);
         }
 
         //REDIRECT - JAFETH

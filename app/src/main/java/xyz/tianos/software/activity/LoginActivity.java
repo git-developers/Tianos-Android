@@ -26,8 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.toolbox.Volley;
 import xyz.tianos.software.activity.implement.IBase;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.entity.WsResponse;
@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private RequestQueue requestQueue;
+//    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     }
 
     private void initialize() {
-        requestQueue = Volley.newRequestQueue(LoginActivity.this);
+//        requestQueue = Volley.newRequestQueue(LoginActivity.this);
     }
 
     private void populateAutoComplete() {
@@ -210,7 +210,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
             String registrationId = FirebaseInstanceId.getInstance().getToken();
             HashMap paramsInput = userController.wsLoginUser(username, password, registrationId);
-            webServiceTask(Const.ACTIVITY_LOGIN, LoginActivity.this, Const.ROUTE_LOGIN, paramsInput);
+//            webServiceTask(Const.ACTIVITY_LOGIN, LoginActivity.this, Const.ROUTE_LOGIN, paramsInput);
         }
     }
 

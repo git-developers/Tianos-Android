@@ -1,94 +1,101 @@
 package xyz.tianos.software.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.widget.ListView;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import xyz.tianos.software.rxJava.GitHubClient;
-import xyz.tianos.software.rxJava.GitHubRepo;
-import xyz.tianos.software.rxJava.GitHubRepoAdapter;
-import xyz.tianos.software.activity.implement.IBase;
-import xyz.tianos.software.controller.PointOfSaleController;
-import xyz.tianos.software.controller.UserController;
+import android.support.annotation.NonNull;
+import android.widget.TextView;
 
-public class ApiActivity extends BaseActivity implements IBase {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.rxJava.Response.CityResponse;
+import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
+import xyz.tianos.software.rxJava.Service.PointOfSaleService;
+import xyz.tianos.software.entity.Geoname;
+import xyz.tianos.software.rxJava.RetrofitHelper;
 
-    private static final String TAG = ApiActivity.class.getSimpleName();
-    private GitHubRepoAdapter adapter = new GitHubRepoAdapter();
-    private Subscription subscription;
-    private ListView listView;
-    private UserController userController;
-    private PointOfSaleController pointOfSaleController;
+/**
+ * This activity demonstrates how retrofit and rx work together.
+ */
+public class ApiActivity extends BaseActivity {
+
+    /**
+     * We will query geonames with this service
+     */
+    @NonNull
+    private PointOfSaleService mPointOfSaleService;
+
+    /**
+     * Collects all subscriptions to unsubscribe later
+     */
+    @NonNull
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
+    private TextView mOutputTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.api);
         toolBar("Api", R.string.app_name);
 
-        initialize();
-        getStarredRepos("git-developers");
+        mOutputTextView = (TextView) findViewById(R.id.output);
+
+        // Initialize the city endpoint
+        mPointOfSaleService = new RetrofitHelper().getPointOfSaleService();
+//        mCityService = new RetrofitHelper().getCityService();
+
+        // Trigger our request and display afterwards
+        requestGeonames();
     }
 
-    private void initialize() {
-        userController = new UserController(this);
-        pointOfSaleController = new PointOfSaleController(this);
-        listView = (ListView) findViewById(R.id.listView);
-
-        final ListView listView = (ListView) findViewById(R.id.list_view_repos);
-        listView.setAdapter(adapter);
-    }
-
-    private void getStarredRepos(String username) {
-        subscription = GitHubClient.getInstance()
-                .getStarredRepos(username)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<GitHubRepo>>() {
-                    @Override public void onCompleted() {
-                        Log.d(TAG, "In onCompleted()");
-                    }
-
-                    @Override public void onError(Throwable e) {
-                        e.printStackTrace();
-                        Log.d(TAG, "In onError()");
-                    }
-
-                    @Override public void onNext(List<GitHubRepo> gitHubRepos) {
-                        Log.d(TAG, "In onNext()");
-                        adapter.setGitHubRepos(gitHubRepos);
-                    }
-                });
-    }
-
-    @Override protected void onDestroy() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
+    @Override
+    protected void onDestroy() {
+        // DO NOT CALL .dispose()
+        mCompositeDisposable.clear();
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    private void requestGeonames() {
+        mCompositeDisposable
+            .add(mPointOfSaleService.queryPointOfSale(44.1)
+            .subscribeOn(Schedulers.io()) // "work" on io thread
+            .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
+            .map(new Function<PointOfSaleResponse, List<PointOfSale>>() {
+                @Override
+                public List<PointOfSale> apply(@io.reactivex.annotations.NonNull
+                                               final PointOfSaleResponse pointOfSaleResponse) throws Exception {
+                    // we want to have the geonames and not the wrapper object
+                    return pointOfSaleResponse.point_of_sale;
+                }
+            })
+            .subscribe(new Consumer<List<PointOfSale>>() {
+                @Override
+                public void accept(@io.reactivex.annotations.NonNull final List<PointOfSale> pointOfSales) throws Exception {
+                    displayPointOfSales(pointOfSales);
+                }
+            })
+        );
+    }
+
+    private void displayPointOfSales(@NonNull final List<PointOfSale> pointOfSales) {
+        // Cheap way to display a list of Strings - I was too lazy to implement a RecyclerView
+        final StringBuilder output = new StringBuilder();
+
+        output.append(" --------- ").append("\n");
+
+        if(pointOfSales != null){
+            for (final PointOfSale pointOfSale : pointOfSales) {
+                output.append(pointOfSale.getName()).append("\n");
+            }
         }
+
+        mOutputTextView.setText(output.toString());
     }
 
-    @Override
-    public void handleOnResponse(JSONObject jsonOutput) {
-
-    }
 }

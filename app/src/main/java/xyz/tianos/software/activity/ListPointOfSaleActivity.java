@@ -46,7 +46,7 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
 
     private void populateList() {
         HashMap paramsInput = userController.wsParamUsername(username);
-        webServiceTask(Const.ACTIVITY_LIST_POINT_OF_SALE, ListPointOfSaleActivity.this, Const.ROUTE_LIST_POINT_OF_SALE, paramsInput);
+//        webServiceTask(Const.ACTIVITY_LIST_POINT_OF_SALE, ListPointOfSaleActivity.this, Const.ROUTE_LIST_POINT_OF_SALE, paramsInput);
     }
 
     @Override
