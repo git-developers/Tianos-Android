@@ -45,7 +45,7 @@ public class NotificationActivity extends BaseActivity {
 
         switch (user.getRole()){
             case Const.ROLE_FATHER:
-                intent.setClass(NotificationActivity.this, ListPointOfSaleActivity.class);
+                intent.setClass(NotificationActivity.this, PointOfSaleActivity.class);
                 break;
             case Const.ROLE_TEACHER:
 //                intent.setClass(NotificationActivity.this, CoursesActivity.class);

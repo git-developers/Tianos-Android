@@ -35,10 +35,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-
 
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -103,7 +99,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         try{
             //toolbar = se tiene que cargar desde el metodo: toolBar()
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+            );
             drawer.setDrawerListener(toggle);
             toggle.syncState();
 
@@ -195,7 +197,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     private void gotoListChildren() {
         Intent intent = new Intent();
-        intent.setClass(BaseActivity.this, ListPointOfSaleActivity.class);
+        intent.setClass(BaseActivity.this, PointOfSaleActivity.class);
         startActivity(intent);
         BaseActivity.this.finish();
 
@@ -319,7 +321,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                         ((LoginActivity)context).handleOnResponse(response);
                             break;
                         case Const.ACTIVITY_LIST_POINT_OF_SALE:
-                        ((ListPointOfSaleActivity)context).handleOnResponse(response);
+                        ((PointOfSaleActivity)context).handleOnResponse(response);
                             break;
 //                        case Const.ACTIVITY_MODULE_NOTICE_TEACHER:
 //                        ((ModuleNoticeTeacherActivity)context).handleOnResponse(response);

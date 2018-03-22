@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Tianos</string>
 
+    <string name="dummy">dummy</string>
+    <string name="next">Continuar</string>
+    <string name="point_of_sale">Puntos de venta</string>
     <string name="submit">Enviar</string>
     <string name="datepicker">Y-m-d</string>
     <string name="enter">Ingrese...</string>

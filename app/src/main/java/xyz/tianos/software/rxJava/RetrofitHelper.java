@@ -19,23 +19,15 @@ import xyz.tianos.software.rxJava.Service.PointOfSaleService;
  * This class initializes retrofit with a default configuration.
  * You can use this class to initialize the different services.
  */
-
 public class RetrofitHelper {
 
     /**
      * The CityService communicates with the json api of the city provider.
      */
-    public CityService getCityService() {
-        final Retrofit retrofit = createRetrofit();
-        return retrofit.create(CityService.class);
-    }
-
     public PointOfSaleService getPointOfSaleService() {
         final Retrofit retrofit = createPointOfSaleRetrofit();
         return retrofit.create(PointOfSaleService.class);
     }
-
-
 
     /**
      * This custom client will append the "username=demo" query after every request.
@@ -54,14 +46,16 @@ public class RetrofitHelper {
                 final HttpUrl url = originalHttpUrl
                         .newBuilder()
                         .addQueryParameter("username", "demo")
-                        .build();
+                        .build()
+                        ;
 
                 Log.d("GATO", "URL:: " + url);
 
                 // Request customization: add request headers
                 final Request.Builder requestBuilder = original
                         .newBuilder()
-                        .url(url);
+                        .url(url)
+                        ;
 
                 final Request request = requestBuilder.build();
                 return chain.proceed(request);
@@ -71,25 +65,17 @@ public class RetrofitHelper {
         return httpClient.build();
     }
 
-//    http://tianos.xyz/api/point-of-sale/
     /**
      * Creates a pre configured Retrofit instance
      */
-    private Retrofit createRetrofit() {
-        return new Retrofit.Builder()
-                .baseUrl("http://api.geonames.org/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // <- add this
-                .client(createOkHttpClient())
-                .build();
-    }
-
     private Retrofit createPointOfSaleRetrofit() {
-        return new Retrofit.Builder()
+        return new Retrofit
+                .Builder()
                 .baseUrl("http://tianos.xyz/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // <- add this
                 .client(createOkHttpClient())
-                .build();
+                .build()
+                ;
     }
 }

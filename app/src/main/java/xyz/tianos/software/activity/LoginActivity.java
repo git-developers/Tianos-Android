@@ -291,12 +291,12 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                             Intent intent = new Intent();
 
                             intent.setClass(LoginActivity.this, ApiActivity.class);
-//                            intent.setClass(LoginActivity.this, ListPointOfSaleActivity.class);
+//                            intent.setClass(LoginActivity.this, PointOfSaleActivity.class);
 
                             /*
                             switch (user.getRole()){
                                 case Const.ROLE_FATHER:
-                                    intent.setClass(LoginActivity.this, ListPointOfSaleActivity.class);
+                                    intent.setClass(LoginActivity.this, PointOfSaleActivity.class);
                                     break;
                                 case Const.ROLE_TEACHER:
                                     intent.setClass(LoginActivity.this, CoursesActivity.class);

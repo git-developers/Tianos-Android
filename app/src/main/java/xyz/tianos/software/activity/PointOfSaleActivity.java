@@ -22,16 +22,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListPointOfSaleActivity extends BaseActivity implements IBase {
+public class PointOfSaleActivity extends BaseActivity {
 
-    private static final String TAG = "ListPointOfSaleActivity";
+    private static final String TAG = PointOfSaleActivity.class.getSimpleName();
     private ListView listView;
-    private UserController userController;
     private PointOfSaleController pointOfSaleController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.api);
+        setContentView(R.layout.point_of_sale);
         toolBar("Puntos de venta", R.string.app_name);
 
         initialize();
@@ -39,19 +39,37 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
     }
 
     private void initialize() {
-        userController = new UserController(this);
-        pointOfSaleController = new PointOfSaleController(this);
+        pointOfSaleController = new PointOfSaleController(PointOfSaleActivity.this);
         listView = (ListView) findViewById(R.id.listView);
     }
 
     private void populateList() {
-        HashMap paramsInput = userController.wsParamUsername(username);
-//        webServiceTask(Const.ACTIVITY_LIST_POINT_OF_SALE, ListPointOfSaleActivity.this, Const.ROUTE_LIST_POINT_OF_SALE, paramsInput);
+
+        List<PointOfSale> listObject = pointOfSaleController.findAll("username");
+
+        if(listObject != null) {
+            listView.setAdapter(new PointOfSaleAdapter(PointOfSaleActivity.this, listObject));
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                    Object o = listView.getItemAtPosition(position);
+                    PointOfSale pointOfSale = (PointOfSale) o;
+                    Utils.shortToast(PointOfSaleActivity.this, "Seleccionado: " + pointOfSale.getName());
+                }
+            });
+        }
+
+
+
+
+//        HashMap paramsInput = userController.wsParamUsername(username);
+//        webServiceTask(Const.ACTIVITY_LIST_POINT_OF_SALE, PointOfSaleActivity.this, Const.ROUTE_LIST_POINT_OF_SALE, paramsInput);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -59,16 +77,18 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
         }
     }
 
-    private void gotoCoursesByUser() {
-        Intent intent = new Intent();
-//        intent.setClass(ListPointOfSaleActivity.this, CoursesByUserActivity.class);
-        startActivity(intent);
-//        CoursesActivity.this.finish();
+//    private void gotoCoursesByUser() {
+//        Intent intent = new Intent();
+////        intent.setClass(PointOfSaleActivity.this, CoursesByUserActivity.class);
+//        startActivity(intent);
+////        CoursesActivity.this.finish();
+//
+//        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
+//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//    }
 
-        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
 
+    /*
     @Override
     public void handleOnResponse(final JSONObject jsonOutput) {
 
@@ -83,9 +103,7 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
 
                     if(listObject != null){
 
-
-                        /*
-                        listView.setAdapter(new PointOfSaleAdapter(ListPointOfSaleActivity.this, listObject));
+                        listView.setAdapter(new PointOfSaleAdapter(PointOfSaleActivity.this, listObject));
 
                         // When the user clicks on the ListItem
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,20 +119,20 @@ public class ListPointOfSaleActivity extends BaseActivity implements IBase {
 //
 //                                gotoCoursesByUser();
 
-//                                Utils.shortToast(ListPointOfSaleActivity.this, "Seleccionado:" + " " + user.getName());
-                                Utils.shortToast(ListPointOfSaleActivity.this, "Seleccionado: POS");
+//                                Utils.shortToast(PointOfSaleActivity.this, "Seleccionado:" + " " + user.getName());
+                                Utils.shortToast(PointOfSaleActivity.this, "Seleccionado: POS");
                             }
                         });
-                        */
                     }else{
-                        Utils.shortToast(ListPointOfSaleActivity.this, "NULL listObject");
+                        Utils.shortToast(PointOfSaleActivity.this, "NULL listObject");
                     }
                 }else{
-                    Utils.shortToast(ListPointOfSaleActivity.this, response.getMessage());
+                    Utils.shortToast(PointOfSaleActivity.this, response.getMessage());
                 }
             }
         });
 
     }
+    */
 
 }

@@ -41,12 +41,12 @@ public class SplashActivity extends BaseActivity {
 
         if(user != null && isLogged){
 
-            intent.setClass(SplashActivity.this, ListPointOfSaleActivity.class);
+            intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
 
             /*
             switch (user.getRole()){
                 case Const.ROLE_FATHER:
-                    intent.setClass(SplashActivity.this, ListPointOfSaleActivity.class);
+                    intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
                     break;
                 case Const.ROLE_TEACHER:
                     intent.setClass(SplashActivity.this, CoursesActivity.class);

@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView_notice"
+            android:id="@+id/imageView_user"
             android:layout_width="45dip"
             android:layout_height="45dip"
             android:layout_gravity="center_horizontal"
@@ -26,11 +26,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView_noticeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Course Name"
+        android:text="Student Name"
+        android:id="@+id/textView_studentName"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ll_icon"
         android:layout_alignParentRight="true"
@@ -39,33 +39,18 @@
         android:layout_margin="5dp" />
 
     <TextView
-        android:id="@+id/textView_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Item: ..."
+        android:id="@+id/textView_item"
         android:layout_alignBottom="@+id/ll_icon"
-        android:layout_alignLeft="@+id/textView_courseName"
-        android:layout_alignStart="@+id/textView_courseName"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp" />
 
-    <TextView
-        android:id="@+id/textView_createdAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ll_icon"
-        android:layout_alignRight="@+id/textView_item"
-        android:text="createdAt: ..."
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignStart="@+id/textView_noticeMessage" />
-
-    <!--android:layout_alignParentLeft="false"-->
-    <!--android:layout_alignBottom="@+id/ll_icon"-->
     <!--android:layout_alignLeft="@+id/textView_courseName"-->
     <!--android:layout_alignStart="@+id/textView_courseName"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_alignParentEnd="true"-->
 
 </RelativeLayout>

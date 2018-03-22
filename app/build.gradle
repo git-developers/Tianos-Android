@@ -7,10 +7,10 @@ android {
 //    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId 'xyz.tianos.software.project'
-        minSdkVersion 19
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 3
-        versionName "Tianos 2.1"
+        versionName "3.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -22,7 +22,6 @@ android {
     productFlavors {
     }
 }
-
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

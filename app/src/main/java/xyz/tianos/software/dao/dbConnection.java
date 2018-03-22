@@ -10,7 +10,7 @@ public class dbConnection {
     protected dbSQLiteHelper dbSQLiteHelper;
     protected SQLiteDatabase sqliteDb;
     protected SQLiteStatement sqliteSt;
-    private static String BORRAR_SECUENCIA_TABLA = "DELETE FROM SQLITE_SEQUENCE WHERE NAME = ";
+    private static String DELETE_SEQUENCE_TABLE = "DELETE FROM SQLITE_SEQUENCE WHERE NAME = ";
 
     public static void closeConnection(Context context) {
         new dbConnection(context).closeDb();
@@ -24,7 +24,7 @@ public class dbConnection {
 
     public void deleteTable(String tableName) {
         this.sqliteDb.delete(tableName, null, null);
-        this.sqliteDb.execSQL(BORRAR_SECUENCIA_TABLA + "'" + tableName + "'");
+        this.sqliteDb.execSQL(DELETE_SEQUENCE_TABLE + "'" + tableName + "'");
     }
 
     public void endTransaction() {

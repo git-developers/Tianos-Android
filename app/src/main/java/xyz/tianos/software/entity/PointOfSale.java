@@ -129,7 +129,7 @@ public class PointOfSale implements Serializable {
     }
 
     public String getImage() {
-        return "ic_content_paste"; //image;
+        return "ic_home_black_24dp";
     }
 
     //    public String getName() {

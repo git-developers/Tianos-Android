@@ -1,7 +1,6 @@
 package xyz.tianos.software.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +47,9 @@ public class PointOfSaleAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.teacher_list_item_users_by_course, null);
+            convertView = layoutInflater.inflate(R.layout.point_of_sale_adapter_item, null);
             holder = new ViewHolder();
             holder.userImageView = (ImageView) convertView.findViewById(R.id.imageView_user);
             holder.studentNameView = (TextView) convertView.findViewById(R.id.textView_studentName);
