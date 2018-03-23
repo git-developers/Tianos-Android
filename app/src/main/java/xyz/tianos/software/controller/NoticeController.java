@@ -2,7 +2,6 @@ package xyz.tianos.software.controller;
 
 import android.content.Context;
 
-import xyz.tianos.software.entity.Notice;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 import com.google.gson.Gson;

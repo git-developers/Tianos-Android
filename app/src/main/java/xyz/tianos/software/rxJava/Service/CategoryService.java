@@ -1,14 +1,12 @@
 package xyz.tianos.software.rxJava.Service;
 
 import io.reactivex.Single;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.Field;
-import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+import xyz.tianos.software.rxJava.Response.CategoryResponse;
 
-public interface PointOfSaleService {
+public interface CategoryService {
 
     /**
      * This method returns all cities within a given bounding box
@@ -17,9 +15,9 @@ public interface PointOfSaleService {
      *
      * @param north    bounding box north
      */
-    @POST("point-of-sale/")
+    @POST("category/")
     @FormUrlEncoded
-    Single<PointOfSaleResponse> queryPointOfSale (
+    Single<CategoryResponse> queryCategory (
         @Field("north") double north
     );
 

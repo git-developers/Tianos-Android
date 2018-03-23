@@ -3,7 +3,6 @@ package xyz.tianos.software.controller;
 import android.content.Context;
 
 import xyz.tianos.software.dao.implement.UserDaoImplement;
-import xyz.tianos.software.entity.Courses;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;

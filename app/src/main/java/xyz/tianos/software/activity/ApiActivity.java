@@ -129,6 +129,38 @@ public class ApiActivity extends BaseActivity {
                         pbPointOfSale.setVisibility(View.GONE);
                         ivPointOfSaleOk.setVisibility(View.VISIBLE);
 
+                        requestApiProduct();
+                    }
+                }
+            })
+        );
+    }
+
+    private void requestApiProduct()
+    {
+        mCompositeDisposable
+            .add(mPointOfSaleService.queryPointOfSale(44.1)
+            .subscribeOn(Schedulers.io()) // "work" on io thread
+            .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
+            .map(new Function<PointOfSaleResponse, List<PointOfSale>>() {
+                @Override
+                public List<PointOfSale> apply(@io.reactivex.annotations.NonNull
+                                               final PointOfSaleResponse pointOfSaleResponse) throws Exception {
+                    // we want to have the geonames and not the wrapper object
+                    return pointOfSaleResponse.point_of_sale;
+                }
+            })
+            .subscribe(new Consumer<List<PointOfSale>>() {
+                @Override
+                public void accept(@io.reactivex.annotations.NonNull
+                                   final List<PointOfSale> pointOfSales) throws Exception {
+
+                    if(pointOfSales != null) {
+                        long idInserted = pointOfSaleController.insertList(username, pointOfSales);
+
+                        pbPointOfSale.setVisibility(View.GONE);
+                        ivPointOfSaleOk.setVisibility(View.VISIBLE);
+
                     }
                 }
             })

@@ -3,9 +3,6 @@ package xyz.tianos.software.controller;
 import android.content.Context;
 import android.util.Log;
 
-import xyz.tianos.software.entity.Courses;
-import xyz.tianos.software.entity.Grades;
-import xyz.tianos.software.entity.Semester;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
