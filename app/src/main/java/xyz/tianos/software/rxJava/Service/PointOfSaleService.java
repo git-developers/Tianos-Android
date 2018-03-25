@@ -7,6 +7,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Field;
 import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
+import xyz.tianos.software.utils.Const;
 
 public interface PointOfSaleService {
 
@@ -17,7 +18,7 @@ public interface PointOfSaleService {
      *
      * @param north    bounding box north
      */
-    @POST("point-of-sale/")
+    @POST(Const.ROUTE_POINT_OF_SALE)
     @FormUrlEncoded
     Single<PointOfSaleResponse> queryPointOfSale (
         @Field("north") double north

@@ -50,8 +50,6 @@ public class User implements Serializable {
     @SerializedName("insert_type")
     private String insertType;
 
-    private Attendance attendance;
-
     public User() {
 
     }
@@ -161,23 +159,6 @@ public class User implements Serializable {
 
     public void setInsertType(String insertType) {
         this.insertType = insertType;
-    }
-
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
-    public int getAttendanceOrNull() {
-
-        if(attendance != null){
-            return attendance.getCurrent();
-        }
-
-        return Attendance.FALTA;
-    }
-
-    public void setAttendance(Attendance attendance) {
-        this.attendance = attendance;
     }
 
     @Override

@@ -159,7 +159,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_list_children) {
             gotoListChildren();
         } else if (id == R.id.nav_reports) {
-            gotoReports();
+//            gotoReports();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -205,20 +205,20 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
-    private void gotoReports() {
-        Intent intent = new Intent();
-//        intent.setClass(BaseActivity.this, ReportsActivity.class);
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Const.BUNDLE_ROUTE, Const.ROUTE_REPORTS_PIECHART);
-        intent.putExtras(bundle);
-
-        startActivity(intent);
-        BaseActivity.this.finish();
-
-        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
+//    private void gotoReports() {
+//        Intent intent = new Intent();
+////        intent.setClass(BaseActivity.this, ReportsActivity.class);
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Const.BUNDLE_ROUTE, Const.ROUTE_REPORTS_PIECHART);
+//        intent.putExtras(bundle);
+//
+//        startActivity(intent);
+//        BaseActivity.this.finish();
+//
+//        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
+//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//    }
 
     public void failedAsyncTask(final Context context, final String message) {
         runOnUiThread(new Runnable() {

@@ -8,23 +8,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import xyz.tianos.software.activity.R;
 import xyz.tianos.software.entity.PointOfSale;
 import xyz.tianos.software.utils.Utils;
-
-import java.util.List;
 
 /**
  * Created by jafeth on 3/31/17.
  */
 
-public class PointOfSaleAdapter extends BaseAdapter {
+public class ProductAdapter extends BaseAdapter {
 
     private List<PointOfSale> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public PointOfSaleAdapter(Context aContext, List<PointOfSale> listData) {
+    public ProductAdapter(Context aContext, List<PointOfSale> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -49,8 +49,8 @@ public class PointOfSaleAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.point_of_sale_adapter_item, null);
-
+            convertView = layoutInflater.inflate(R.layout.product_adapter_item, null);
+            
             holder = new ViewHolder();
             holder.ivThumbnail = (ImageView) convertView.findViewById(R.id.iv_thumbnail);
             holder.tvText = (TextView) convertView.findViewById(R.id.tv_text);

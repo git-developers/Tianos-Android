@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 public class Category implements Serializable {
 
-//    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
-
     @SerializedName("id")
     private int id;
 
@@ -30,7 +28,7 @@ public class Category implements Serializable {
     @SerializedName("image")
     private String image;
 
-//    private Attendance attendance;
+    private int categoryId;
 
     public Category() {
 
@@ -76,6 +74,14 @@ public class Category implements Serializable {
         return "ic_low_priority_black_24dp";
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     //    public String getName() {
 //        try{
 //            return name.trim();
@@ -84,6 +90,8 @@ public class Category implements Serializable {
 //        }
 //
 //    }
+
+
 
     @Override
     public String toString() {

@@ -2,14 +2,13 @@ package xyz.tianos.software.rxJava.Response;
 
 import java.util.List;
 
-import xyz.tianos.software.entity.ApiCategory;
-import xyz.tianos.software.entity.Category;
+import xyz.tianos.software.entity.Product;
 
 /**
  * Created by mbruns on 20.05.17.
  * The response wrapper for GSON to be able to parse the JSON response into our models
  */
 
-public class CategoryResponse {
-    public List<ApiCategory> category;
+public class ProductResponse {
+    public List<Product> product;
 }

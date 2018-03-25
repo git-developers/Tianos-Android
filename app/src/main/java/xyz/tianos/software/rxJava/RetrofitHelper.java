@@ -13,6 +13,9 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.tianos.software.rxJava.Service.PointOfSaleService;
+import xyz.tianos.software.rxJava.Service.ProductService;
+import xyz.tianos.software.rxJava.Service.CategoryService;
+import xyz.tianos.software.utils.Const;
 
 /**
  * This class initializes retrofit with a default configuration.
@@ -24,8 +27,18 @@ public class RetrofitHelper {
      * The CityService communicates with the json api of the city provider.
      */
     public PointOfSaleService getPointOfSaleService() {
-        final Retrofit retrofit = createPointOfSaleRetrofit();
+        final Retrofit retrofit = createTianosRetrofit();
         return retrofit.create(PointOfSaleService.class);
+    }
+
+    public ProductService getProductService() {
+        final Retrofit retrofit = createTianosRetrofit();
+        return retrofit.create(ProductService.class);
+    }
+
+    public CategoryService getCategoryService() {
+        final Retrofit retrofit = createTianosRetrofit();
+        return retrofit.create(CategoryService.class);
     }
 
     /**
@@ -67,10 +80,10 @@ public class RetrofitHelper {
     /**
      * Creates a pre configured Retrofit instance
      */
-    private Retrofit createPointOfSaleRetrofit() {
+    private Retrofit createTianosRetrofit() {
         return new Retrofit
                 .Builder()
-                .baseUrl("http://tianos.xyz/api/")
+                .baseUrl(Const.API_BASE_ROUTE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // <- add this
                 .client(createOkHttpClient())

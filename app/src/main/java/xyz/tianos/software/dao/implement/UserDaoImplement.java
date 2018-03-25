@@ -19,32 +19,28 @@ public class UserDaoImplement extends dbConnection implements IUser {
         super(context);
     }
 
-    public long insert(User user) {
-
-
-        Log.i("GATO", "GATO:: " + user.getInsertType());
-
-
-
+    @Override
+    public long insert(User object) {
 
         ContentValues values = new ContentValues();
-        values.put(dbTables.USERNAME, user.getUsername());
-        values.put(dbTables.NAME, user.getName());
-        values.put(dbTables.T_USER_LAST_NAME, user.getLast_name());
-        values.put(dbTables.T_USER_EMAIL, user.getEmail());
-        values.put(dbTables.T_USER_ROLE, user.getRole());
+        values.put(dbTables.USERNAME, object.getUsername());
+        values.put(dbTables.NAME, object.getName());
+        values.put(dbTables.T_USER_LAST_NAME, object.getLast_name());
+        values.put(dbTables.T_USER_EMAIL, object.getEmail());
+        values.put(dbTables.T_USER_ROLE, object.getRole());
 //        values.put(dbTables.T_USER_INSERT_TYPE, user.getInsertType());
 //        values.put(dbTables.T_USER_ROLE, user.getProfile().getPermission().getAlias());
 //        Integer.valueOf(usuario.getPrivilegios())
         return this.getSqliteDb().insert(dbTables.T_USER, null, values);
     }
 
+    @Override
     public User findOneById(String id) {
         User user = new User();
         Cursor cursor = null;
 
         try {
-            cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE id_increment=" + id, null);
+            cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE id=" + id, null);
             while (cursor.moveToNext()) {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
                 user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
@@ -58,17 +54,21 @@ public class UserDaoImplement extends dbConnection implements IUser {
         return user;
     }
 
+    @Override
     public User findOneByUsername(String username) {
-        User user = new User();
+        User object = new User();
         Cursor cursor = null;
 
         try {
-            cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE " + dbTables.USERNAME + "='" + username + "' LIMIT 1", null);
+            cursor = this.getSqliteDb()
+                    .rawQuery("SELECT * FROM " +
+                            dbTables.T_USER + " WHERE " +
+                            dbTables.USERNAME + "='" + username + "' LIMIT 1", null);
             while (cursor.moveToNext()) {
-                user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
-                user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
+                object.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
+                object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
+                object.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
+                object.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }
         } finally {
             if (cursor != null) {
@@ -76,24 +76,24 @@ public class UserDaoImplement extends dbConnection implements IUser {
             }
         }
 
-        return user;
+        return object;
     }
 
+    @Override
     public User findLastLogged() {
-        User user = new User();
+        User object = new User();
         Cursor cursor = null;
 
         try {
             cursor = this.getSqliteDb().rawQuery(
                     " SELECT * FROM " + dbTables.T_USER +
-//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_LOGIN + "' " +
                     " ORDER BY " + dbTables.ID +
                     " DESC LIMIT 1", null);
             while (cursor.moveToNext()) {
-                user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
-                user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
+                object.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
+                object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
+                object.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
+                object.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
             }
         } finally {
             if (cursor != null) {
@@ -101,62 +101,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
             }
         }
 
-        return user;
-    }
-
-    public User findLastStudentSelected() {
-        User user = new User();
-        Cursor cursor = null;
-
-        try {
-//            cursor = this.getSqliteDb().rawQuery(
-//                    " SELECT * FROM " + dbTables.T_USER +
-//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_SELECTED_STUDENT + "' " +
-//                    " ORDER BY " + dbTables.ID_INCREMENT +
-//                    " DESC LIMIT 1", null);
-            while (cursor.moveToNext()) {
-                user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
-                user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-
-        return user;
-    }
-
-    public User findLastChildSelected() {
-        User user = new User();
-        Cursor cursor = null;
-
-        try {
-//            cursor = this.getSqliteDb().rawQuery(
-//                    " SELECT * FROM " + dbTables.T_USER +
-//                    " WHERE " + dbTables.T_USER_INSERT_TYPE + " = '" + User.INSERT_TYPE_CHILDREN + "' " +
-//                    " ORDER BY " + dbTables.ID_INCREMENT +
-//                    " DESC LIMIT 1", null);
-            while (cursor.moveToNext()) {
-                user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                user.setEmail(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_EMAIL)));
-                user.setRole(cursor.getString(cursor.getColumnIndex(dbTables.T_USER_ROLE)));
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-
-        return user;
-    }
-
-    public ArrayList<User> findAllByUsername(String username) {
-        ArrayList<User> users = new ArrayList();
-        return null;
+        return object;
     }
 
     public void deleteTable() {

@@ -19,70 +19,25 @@ public class PointOfSaleController extends BaseController {
         this.dao = new PointOfSaleDaoImplement(this.context);
     }
 
-//    public HashMap wsListCourses(String username) {
-//
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        try {
-//            params.put(Const.PARAMETER_USERNAME, username);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return params;
-//    }
-
-//    public List<PointOfSale> parseJsonToArrayObject(JSONObject jsonOutput) {
-//
-//        List<PointOfSale> listObject = null;
-//
-//        try {
-//            if(jsonOutput.has(Const.JSON_KEY_POINT_OF_SALE)){
-//                JSONArray jsonOutput2 = jsonOutput.getJSONArray(Const.JSON_KEY_POINT_OF_SALE);
-//                Gson gson = Utils.gsonBuilder();
-//                Type listType = new TypeToken<List<PointOfSale>>(){}.getType();
-//                listObject = (List<PointOfSale>) gson.fromJson(jsonOutput2.toString(), listType);
-//            }
-//        } catch (Exception e) {
-//            e.getMessage();
-//        }
-//
-//        return listObject;
-//    }
-
-//    public PointOfSale parseJsonToObject(JSONObject jsonOutput) {
-//
-//        PointOfSale object = null;
-//
-//        try {
-//            if(jsonOutput.has(Const.JSON_KEY_POINT_OF_SALE)){
-//                JSONObject jsonOutput2 = jsonOutput.getJSONObject(Const.JSON_KEY_POINT_OF_SALE);
-//                Gson gson = Utils.gsonBuilder();
-//                object = (PointOfSale) gson.fromJson(jsonOutput2.toString(), PointOfSale.class);
-//            }
-//        } catch (JSONException e) {
-//            e.getMessage();
-//        }
-//
-//        return object;
-//    }
-
-    public long insert(String username, PointOfSale pointOfSale) {
-        long idInserted = dao.insert(username, pointOfSale);
+    public long insert(String username, PointOfSale object) {
+        long idInserted = dao.insert(username, object);
         dao.closeDb();
+
         return idInserted;
     }
 
     /**
      *
      * @param username
-     * @param pointOfSales
+     * @param objects
      * @return
      */
-    public long insertList(String username, List<PointOfSale> pointOfSales) {
+    public long insertList(String username, List<PointOfSale> objects) {
 
         long idInserted = 0;
 
-        for (final PointOfSale pointOfSale : pointOfSales) {
-            idInserted = dao.insert(username, pointOfSale);
+        for (final PointOfSale object : objects) {
+            idInserted = dao.insert(username, object);
         }
 
         dao.closeDb();
@@ -90,9 +45,15 @@ public class PointOfSaleController extends BaseController {
     }
 
     public ArrayList<PointOfSale> findAll(String username) {
-        ArrayList<PointOfSale> pointOfSales = dao.findAll(username);
+        ArrayList<PointOfSale> objects = dao.findAll(username);
         dao.closeDb();
-        return pointOfSales;
+
+        return objects;
+    }
+
+    public void deleteTable() {
+        dao.deleteTable();
+        dao.closeDb();
     }
 
 }

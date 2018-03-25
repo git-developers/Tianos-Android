@@ -23,15 +23,17 @@ public class dbTables {
     public static String T_POINT_OF_SALE_LONGITUDE = "longitude";
 
     public static String T_CATEGORY = "t_category";
+    public static String T_CATEGORY_CATEGORY_ID = "category_id";
+
     public static String T_PRODUCT = "t_product";
 
 
     public static String CREATE_T_USER =
         "CREATE TABLE " + T_USER + " (" +
+            USERNAME + " VARCHAR(50)," +
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             NAME + " VARCHAR(250)," +
             CODE + " VARCHAR(50)," +
-            USERNAME + " VARCHAR(50)," +
             T_USER_LAST_NAME + " VARCHAR(200)," +
             T_USER_EMAIL + " VARCHAR(200)," +
             T_USER_ROLE + " VARCHAR(50)," +
@@ -40,10 +42,10 @@ public class dbTables {
 
     public static String CREATE_T_POINT_OF_SALE =
         "CREATE TABLE " + T_POINT_OF_SALE + " (" +
+            USERNAME + " VARCHAR(50)," +
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             CODE + " VARCHAR(50)," +
             NAME + " VARCHAR(250)," +
-            USERNAME + " VARCHAR(50)," +
             T_POINT_OF_SALE_LATITUDE + " VARCHAR(30)," +
             T_POINT_OF_SALE_LONGITUDE + " VARCHAR(30)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
@@ -51,19 +53,20 @@ public class dbTables {
 
     public static String CREATE_T_CATEGORY =
         "CREATE TABLE " + T_CATEGORY + " (" +
+            USERNAME + " VARCHAR(50)," +
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             CODE + " VARCHAR(50)," +
             NAME + " VARCHAR(250)," +
-            USERNAME + " VARCHAR(50)," +
+            T_CATEGORY_CATEGORY_ID + " INT(11)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 
     public static String CREATE_T_PRODUCT =
         "CREATE TABLE " + T_PRODUCT + " (" +
+            USERNAME + " VARCHAR(50)," +
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             CODE + " VARCHAR(50)," +
             NAME + " VARCHAR(250)," +
-            USERNAME + " VARCHAR(50)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 

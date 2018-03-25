@@ -8,44 +8,41 @@ import java.util.ArrayList;
 
 import xyz.tianos.software.dao.dbConnection;
 import xyz.tianos.software.dao.dbTables;
-import xyz.tianos.software.dao.interfaces.IPointOfSale;
-import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.dao.interfaces.ICategory;
+import xyz.tianos.software.entity.Category;
 
-public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSale {
+public class CategoryDaoImplement extends dbConnection implements ICategory {
 
-    public PointOfSaleDaoImplement(Context context) {
+    public CategoryDaoImplement(Context context) {
         super(context);
     }
 
-    public long insert(String username, PointOfSale object) {
+    public long insert(String username, Category object) {
         ContentValues values = new ContentValues();
         values.put(dbTables.USERNAME, username);
+        values.put(dbTables.T_CATEGORY_CATEGORY_ID, object.getCategoryId());
         values.put(dbTables.ID, object.getId());
         values.put(dbTables.NAME, object.getName());
-        values.put(dbTables.T_POINT_OF_SALE_LATITUDE, object.getLatitude());
-        values.put(dbTables.T_POINT_OF_SALE_LONGITUDE, object.getLongitude());
 
         return this
                 .getSqliteDb()
-                .insert(dbTables.T_POINT_OF_SALE, null, values)
+                .insert(dbTables.T_CATEGORY, null, values)
                 ;
     }
 
-    public ArrayList<PointOfSale> findAll(String username) {
+    public ArrayList<Category> findAll(String username) {
 
-        ArrayList<PointOfSale> objects = new ArrayList();
+        ArrayList<Category> objects = new ArrayList();
         Cursor cursor = null;
 
         try {
 
             cursor = this.getSqliteDb()
-                    .rawQuery("SELECT * FROM " + dbTables.T_POINT_OF_SALE + " ORDER BY " + dbTables.ID + " DESC", null);
+                    .rawQuery("SELECT * FROM " + dbTables.T_CATEGORY + " ORDER BY " + dbTables.ID + " DESC", null);
             while (cursor.moveToNext()) {
-                PointOfSale object = new PointOfSale();
+                Category object = new Category();
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
                 object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                object.setLatitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
-                object.setLongitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
                 objects.add(object);
             }
 
@@ -59,7 +56,7 @@ public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSal
     }
 
     public void deleteTable() {
-        deleteTable(dbTables.T_POINT_OF_SALE);
+        deleteTable(dbTables.T_CATEGORY);
     }
 
 }

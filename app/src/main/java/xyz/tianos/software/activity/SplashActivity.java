@@ -2,11 +2,14 @@ package xyz.tianos.software.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
+import xyz.tianos.software.utils.Utils;
 
 public class SplashActivity extends BaseActivity {
 
+    private static final String TAG = SplashActivity.class.getSimpleName();
     private static final int SPLASH_SCREEN_TIMEOUT = 2000;
-    private static final String TAG = "SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

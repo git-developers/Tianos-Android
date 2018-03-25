@@ -18,12 +18,12 @@ public class Const {
     public static final String ROLE_FATHER = "ROLE_FATHER";
     public static final String ROLE_TEACHER = "ROLE_TEACHER";
 
-//    public static final String HTTP = "http://ff0c1c96.ngrok.io/";
-    public static final String HTTP = "http://tianos.xyz/";
-    public static final String BASE_ROUTE = HTTP + "api/";
-    public static final String ROUTE_LOGIN = BASE_ROUTE + "user/login";
-    public static final String ROUTE_LIST_POINT_OF_SALE = BASE_ROUTE + "point-of-sale/";
-    public static final String ROUTE_REPORTS_PIECHART = BASE_ROUTE + "reports/piechart";
+    public static final String API_BASE_ROUTE = "http://tianos.xyz/api/";
+    public static final String ROUTE_POINT_OF_SALE = "point-of-sale/";
+    public static final String ROUTE_PRODUCT = "product/";
+    public static final String ROUTE_CATEGORY = "category/";
+//    public static final String ROUTE_LIST_POINT_OF_SALE = API_BASE_ROUTE + "point-of-sale/";
+//    public static final String ROUTE_REPORTS_PIECHART = API_BASE_ROUTE + "reports/piechart";
 
     public static final String CONTENT_TYPE = "application/json";
     public static final String PREFERENCES = "preferences";

@@ -4,10 +4,10 @@ import io.reactivex.Single;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import xyz.tianos.software.rxJava.Response.CategoryResponse;
+import xyz.tianos.software.rxJava.Response.ProductResponse;
 import xyz.tianos.software.utils.Const;
 
-public interface CategoryService {
+public interface ProductService {
 
     /**
      * This method returns all cities within a given bounding box
@@ -16,9 +16,9 @@ public interface CategoryService {
      *
      * @param north    bounding box north
      */
-    @POST(Const.ROUTE_CATEGORY)
+    @POST(Const.ROUTE_PRODUCT)
     @FormUrlEncoded
-    Single<CategoryResponse> queryCategory (
+    Single<ProductResponse> queryProduct (
         @Field("north") double north
     );
 
