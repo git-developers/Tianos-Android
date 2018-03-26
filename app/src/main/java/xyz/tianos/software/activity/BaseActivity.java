@@ -131,17 +131,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             MenuItem listCourses = menu.findItem(R.id.nav_list_courses);
             MenuItem listChildren = menu.findItem(R.id.nav_list_children);
 
-            switch (user.getRole()){
-                case Const.ROLE_FATHER:
-                    listChildren.setVisible(true);
-                    break;
-                case Const.ROLE_TEACHER:
-                    listCourses.setVisible(true);
-                    break;
-                default:
-                    Utils.shortToast(this, "El usuario no tiene un rol");
-                    break;
-            }
+//            switch (user.getRole()){
+//                case Const.ROLE_FATHER:
+//                    listChildren.setVisible(true);
+//                    break;
+//                case Const.ROLE_TEACHER:
+//                    listCourses.setVisible(true);
+//                    break;
+//                default:
+//                    Utils.shortToast(this, "El usuario no tiene un rol");
+//                    break;
+//            }
 
         }catch (NullPointerException e){
             Log.d("POLLO", "ERROR: " + e.getMessage());
@@ -165,7 +165,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_logout) {
-            gotoLogin();
+            navigateToLogin();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,7 +173,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void gotoLogin() {
+    private void navigateToLogin() {
         setSharePreferencesIsLogged(false);
 
         Intent intent = new Intent();

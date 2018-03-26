@@ -6,7 +6,6 @@ import android.os.Bundle;
 import java.util.List;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,7 +68,7 @@ public class ApiActivity extends BaseActivity {
      * Collects all subscriptions to unsubscribe later
      */
     @NonNull
-    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+    private CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -85,6 +84,8 @@ public class ApiActivity extends BaseActivity {
 
     private void initialize()
     {
+        mCompositeDisposable = new CompositeDisposable();
+
         // Initialize the city endpoint
         mProductService = new RetrofitHelper().getProductService();
         mCategoryService = new RetrofitHelper().getCategoryService();
@@ -109,15 +110,14 @@ public class ApiActivity extends BaseActivity {
     {
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                gotoPointOfSale();
+                navigateToPointOfSale();
             }
         });
     }
 
-    private void gotoPointOfSale()
+    private void navigateToPointOfSale()
     {
         Intent intent = new Intent();
-//        intent.setClass(this, PointOfSaleActivity.class);
         intent.setClass(this, CategoryActivity.class);
         startActivity(intent);
         ApiActivity.this.finish();

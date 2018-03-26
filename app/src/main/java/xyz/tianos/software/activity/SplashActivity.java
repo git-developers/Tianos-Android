@@ -2,8 +2,8 @@ package xyz.tianos.software.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
+import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
 public class SplashActivity extends BaseActivity {
@@ -44,28 +44,23 @@ public class SplashActivity extends BaseActivity {
 
         if(user != null && isLogged){
 
-            intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
+            int activity = getSharePreferencesActivity();
 
-            /*
-            switch (user.getRole()){
-                case Const.ROLE_FATHER:
+            switch (activity){
+                case Const.ACTIVITY_POINT_OF_SALE:
                     intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
                     break;
-                case Const.ROLE_TEACHER:
-                    intent.setClass(SplashActivity.this, CoursesActivity.class);
+                case Const.ACTIVITY_CATEGORY:
+                    intent.setClass(SplashActivity.this, CategoryActivity.class);
                     break;
                 default:
-                    Utils.shortToast(SplashActivity.this, "El usuario no tiene un rol");
+                    intent.setClass(SplashActivity.this, LoginActivity.class);
                     break;
             }
-            */
-        }else{
-//            intent.setClass(SplashActivity.this, LoginActivity.class);
-            intent.setClass(SplashActivity.this, ApiActivity.class);
-        }
 
-        //REDIRECT - JAFETH
-//        intent.setClass(SplashActivity.this, ModulesSeleccionActivity.class);
+        }else{
+            intent.setClass(SplashActivity.this, LoginActivity.class);
+        }
 
         startActivity(intent);
         SplashActivity.this.finish();

@@ -43,17 +43,17 @@ public class NotificationActivity extends BaseActivity {
 
         Intent intent = new Intent();
 
-        switch (user.getRole()){
-            case Const.ROLE_FATHER:
-                intent.setClass(NotificationActivity.this, PointOfSaleActivity.class);
-                break;
-            case Const.ROLE_TEACHER:
-//                intent.setClass(NotificationActivity.this, CoursesActivity.class);
-                break;
-            default:
-                Utils.shortToast(NotificationActivity.this, "El usuario no tiene un rol");
-                break;
-        }
+//        switch (user.getRole()){
+//            case Const.ROLE_FATHER:
+//                intent.setClass(NotificationActivity.this, PointOfSaleActivity.class);
+//                break;
+//            case Const.ROLE_TEACHER:
+////                intent.setClass(NotificationActivity.this, CoursesActivity.class);
+//                break;
+//            default:
+//                Utils.shortToast(NotificationActivity.this, "El usuario no tiene un rol");
+//                break;
+//        }
 
         startActivity(intent);
         NotificationActivity.this.finish();

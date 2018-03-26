@@ -24,44 +24,44 @@ public class UserController extends BaseController {
         this.dao = new UserDaoImplement(this.context);
     }
 
-    public HashMap wsLoginUser(String username, String password, String registrationId) {
-        HashMap<String, String> params = new HashMap<String, String>();
-        try {
-            params.put(Const.PARAMETER_USERNAME, username);
-            params.put(Const.PARAMETER_PASSWORD, password);
-            params.put(Const.PARAMETER_REGISTRATION_ID, registrationId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return params;
-    }
-
-    public HashMap wsParamUsername(String username) {
-        HashMap<String, String> params = new HashMap<String, String>();
-        try {
-            params.put(Const.PARAMETER_USERNAME, username);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return params;
-    }
-
-    public User parseJsonToObject(JSONObject jsonOutput) {
-
-        User object = null;
-
-        try {
-            if(jsonOutput.has(Const.JSON_KEY_USER)){
-                JSONObject jsonOutput2 = jsonOutput.getJSONObject(Const.JSON_KEY_USER);
-                Gson gson = Utils.gsonBuilder();
-                object = (User) gson.fromJson(jsonOutput2.toString(), User.class);
-            }
-        } catch (JSONException e) {
-            e.getMessage();
-        }
-
-        return object;
-    }
+//    public HashMap wsLoginUser(String username, String password, String registrationId) {
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        try {
+//            params.put(Const.PARAMETER_USERNAME, username);
+//            params.put(Const.PARAMETER_PASSWORD, password);
+//            params.put(Const.PARAMETER_REGISTRATION_ID, registrationId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return params;
+//    }
+//
+//    public HashMap wsParamUsername(String username) {
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        try {
+//            params.put(Const.PARAMETER_USERNAME, username);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return params;
+//    }
+//
+//    public User parseJsonToObject(JSONObject jsonOutput) {
+//
+//        User object = null;
+//
+//        try {
+//            if(jsonOutput.has(Const.JSON_KEY_USER)){
+//                JSONObject jsonOutput2 = jsonOutput.getJSONObject(Const.JSON_KEY_USER);
+//                Gson gson = Utils.gsonBuilder();
+//                object = (User) gson.fromJson(jsonOutput2.toString(), User.class);
+//            }
+//        } catch (JSONException e) {
+//            e.getMessage();
+//        }
+//
+//        return object;
+//    }
 
     public long insert(User user) {
         long idInserted = dao.insert(user);

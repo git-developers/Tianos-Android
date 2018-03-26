@@ -15,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.tianos.software.rxJava.Service.PointOfSaleService;
 import xyz.tianos.software.rxJava.Service.ProductService;
 import xyz.tianos.software.rxJava.Service.CategoryService;
+import xyz.tianos.software.rxJava.Service.UserService;
 import xyz.tianos.software.utils.Const;
 
 /**
@@ -41,6 +42,11 @@ public class RetrofitHelper {
         return retrofit.create(CategoryService.class);
     }
 
+    public UserService getUserService() {
+        final Retrofit retrofit = createTianosRetrofit();
+        return retrofit.create(UserService.class);
+    }
+
     /**
      * This custom client will append the "username=demo" query after every request.
      */
@@ -57,7 +63,7 @@ public class RetrofitHelper {
 //                http://api.geonames.org?username=demo
                 final HttpUrl url = originalHttpUrl
                         .newBuilder()
-                        .addQueryParameter("username", "demo")
+                        .addQueryParameter("pollo", "demo")
                         .build()
                         ;
 

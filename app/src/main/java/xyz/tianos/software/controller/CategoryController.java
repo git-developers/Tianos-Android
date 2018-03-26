@@ -1,10 +1,6 @@
 package xyz.tianos.software.controller;
 
 import android.content.Context;
-import android.util.Log;
-import java.lang.reflect.*;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +19,6 @@ public class CategoryController extends BaseController {
         this.dao = new CategoryDaoImplement(this.context);
     }
 
-    /**
-     *
-     * @param username
-     * @param objects
-     * @return
-     */
     public long insertList(String username, List<ApiCategory> objects) {
 
         long idInserted = 0;

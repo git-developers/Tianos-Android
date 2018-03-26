@@ -1,6 +1,5 @@
 package xyz.tianos.software.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,23 +7,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import xyz.tianos.software.activity.implement.IBase;
-import xyz.tianos.software.adapter.PointOfSaleAdapter;
-import xyz.tianos.software.controller.PointOfSaleController;
-import xyz.tianos.software.controller.UserController;
-import xyz.tianos.software.entity.PointOfSale;
-import xyz.tianos.software.entity.WsResponse;
-import xyz.tianos.software.utils.Const;
-import xyz.tianos.software.utils.Utils;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
 
-public class PointOfSaleActivity extends BaseActivity {
+import xyz.tianos.software.adapter.PointOfSaleAdapter;
+import xyz.tianos.software.controller.PointOfSaleController;
+import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.utils.Utils;
 
-    private static final String TAG = PointOfSaleActivity.class.getSimpleName();
+public class PointOfSaleHasProductActivity extends BaseActivity {
+
+    private static final String TAG = PointOfSaleHasProductActivity.class.getSimpleName();
     private ListView listView;
     private PointOfSaleController pointOfSaleController;
 
@@ -33,14 +25,13 @@ public class PointOfSaleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.point_of_sale);
         toolBar("Puntos de venta", R.string.app_name);
-        setSharePreferencesActivity(Const.ACTIVITY_POINT_OF_SALE);
 
         initialize();
         populateList();
     }
 
     private void initialize() {
-        pointOfSaleController = new PointOfSaleController(PointOfSaleActivity.this);
+        pointOfSaleController = new PointOfSaleController(PointOfSaleHasProductActivity.this);
         listView = (ListView) findViewById(R.id.listView);
     }
 
@@ -49,13 +40,13 @@ public class PointOfSaleActivity extends BaseActivity {
         List<PointOfSale> listObject = pointOfSaleController.findAll("username");
 
         if(listObject != null) {
-            listView.setAdapter(new PointOfSaleAdapter(PointOfSaleActivity.this, listObject));
+            listView.setAdapter(new PointOfSaleAdapter(PointOfSaleHasProductActivity.this, listObject));
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                     Object o = listView.getItemAtPosition(position);
                     PointOfSale pointOfSale = (PointOfSale) o;
-                    Utils.shortToast(PointOfSaleActivity.this, "Seleccionado: " + pointOfSale.getName());
+                    Utils.shortToast(PointOfSaleHasProductActivity.this, "Seleccionado: " + pointOfSale.getName());
                 }
             });
         }
