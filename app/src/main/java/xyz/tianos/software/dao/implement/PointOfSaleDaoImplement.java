@@ -31,6 +31,34 @@ public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSal
                 ;
     }
 
+    public PointOfSale findOneById(String id) {
+
+        PointOfSale object = new PointOfSale();
+        Cursor cursor = null;
+
+        try {
+
+            cursor = this.getSqliteDb()
+                    .rawQuery("SELECT * " +
+                            " FROM " + dbTables.T_POINT_OF_SALE +
+                            " WHERE id= '" + id + "'", null);
+
+            while (cursor.moveToNext()) {
+                object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
+                object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
+                object.setLatitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
+                object.setLongitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
+            }
+
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return object;
+    }
+
     public ArrayList<PointOfSale> findAll(String username) {
 
         ArrayList<PointOfSale> objects = new ArrayList();

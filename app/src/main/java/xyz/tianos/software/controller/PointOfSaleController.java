@@ -44,6 +44,13 @@ public class PointOfSaleController extends BaseController {
         return idInserted;
     }
 
+    public PointOfSale findOneById(String id) {
+        PointOfSale object = dao.findOneById(id);
+        dao.closeDb();
+
+        return object;
+    }
+
     public ArrayList<PointOfSale> findAll(String username) {
         ArrayList<PointOfSale> objects = dao.findAll(username);
         dao.closeDb();

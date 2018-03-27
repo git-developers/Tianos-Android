@@ -12,6 +12,7 @@ import java.util.List;
 
 import xyz.tianos.software.activity.R;
 import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
 /**
@@ -64,7 +65,7 @@ public class ProductAdapter extends BaseAdapter {
         holder.tvText.setText(pos.getName());
         holder.tvId.setText("id: " + pos.getId());
 
-        int imageId = Utils.getResourceIdByName(context, pos.getImage(), "drawable");
+        int imageId = Utils.getResourceIdByName(context, pos.getImage(), Const.DEF_TYPE_DRAWABLE);
         holder.ivThumbnail.setImageResource(imageId);
 
         return convertView;

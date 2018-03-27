@@ -3,6 +3,7 @@
 
     <string name="dummy">dummy</string>
     <string name="next">Continuar</string>
+    <string name="login_default">abringas@tianos.xyz</string>
     <string name="point_of_sale">Puntos de venta</string>
     <string name="submit">Enviar</string>
     <string name="datepicker">Y-m-d</string>
@@ -25,6 +26,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_login_in">Log in</string>
+    <string name="action_start_visit">iniciar visita</string>
     <string name="error_invalid_email">El email es invalido</string>
     <string name="error_invalid_password">El password es muy corto</string>
     <string name="error_incorrect_password">This password is incorrect</string>

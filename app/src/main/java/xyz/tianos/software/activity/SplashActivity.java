@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity {
                     intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
                     break;
                 case Const.ACTIVITY_CATEGORY:
-                    intent.setClass(SplashActivity.this, CategoryActivity.class);
+                    intent.setClass(SplashActivity.this, ExpandableCategoryActivity.class);
                     break;
                 default:
                     intent.setClass(SplashActivity.this, LoginActivity.class);
@@ -61,6 +61,10 @@ public class SplashActivity extends BaseActivity {
         }else{
             intent.setClass(SplashActivity.this, LoginActivity.class);
         }
+
+
+        //***********JAFETH
+//        intent.setClass(SplashActivity.this, StartVisitActivity.class);
 
         startActivity(intent);
         SplashActivity.this.finish();

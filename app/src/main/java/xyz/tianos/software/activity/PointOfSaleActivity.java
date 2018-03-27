@@ -8,18 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import xyz.tianos.software.activity.implement.IBase;
 import xyz.tianos.software.adapter.PointOfSaleAdapter;
 import xyz.tianos.software.controller.PointOfSaleController;
-import xyz.tianos.software.controller.UserController;
 import xyz.tianos.software.entity.PointOfSale;
-import xyz.tianos.software.entity.WsResponse;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
 
 public class PointOfSaleActivity extends BaseActivity {
@@ -32,7 +26,7 @@ public class PointOfSaleActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.point_of_sale);
-        toolBar("Puntos de venta", R.string.app_name);
+        toolBar("Puntos de venta 55555", R.string.app_name);
         setSharePreferencesActivity(Const.ACTIVITY_POINT_OF_SALE);
 
         initialize();
@@ -55,10 +49,21 @@ public class PointOfSaleActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                     Object o = listView.getItemAtPosition(position);
                     PointOfSale pointOfSale = (PointOfSale) o;
-                    Utils.shortToast(PointOfSaleActivity.this, "Seleccionado: " + pointOfSale.getName());
+
+                    navigateToStartVisit();
                 }
             });
         }
+    }
+
+    private void navigateToStartVisit()
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, StartVisitActivity.class);
+        startActivity(intent);
+        PointOfSaleActivity.this.finish();
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -71,63 +76,5 @@ public class PointOfSaleActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
-
-//    private void gotoCoursesByUser() {
-//        Intent intent = new Intent();
-////        intent.setClass(PointOfSaleActivity.this, CoursesByUserActivity.class);
-//        startActivity(intent);
-////        CoursesActivity.this.finish();
-//
-//        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
-//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//    }
-
-
-    /*
-    @Override
-    public void handleOnResponse(final JSONObject jsonOutput) {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                WsResponse response = pointOfSaleController.parseWsResponse(jsonOutput);
-                int status = response.getStatus();
-
-                if(status == Const.STATUS_SUCCESS){
-                    List<PointOfSale> listObject = pointOfSaleController.parseJsonToArrayObject(jsonOutput);
-
-                    if(listObject != null){
-
-                        listView.setAdapter(new PointOfSaleAdapter(PointOfSaleActivity.this, listObject));
-
-                        // When the user clicks on the ListItem
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-
-
-                                //TODO JAFETH
-//                                Object o = listView.getItemAtPosition(position);
-//                                User user = (User) o;
-//
-//                                long idInserted = userController.insert(user);
-//
-//                                gotoCoursesByUser();
-
-//                                Utils.shortToast(PointOfSaleActivity.this, "Seleccionado:" + " " + user.getName());
-                                Utils.shortToast(PointOfSaleActivity.this, "Seleccionado: POS");
-                            }
-                        });
-                    }else{
-                        Utils.shortToast(PointOfSaleActivity.this, "NULL listObject");
-                    }
-                }else{
-                    Utils.shortToast(PointOfSaleActivity.this, response.getMessage());
-                }
-            }
-        });
-
-    }
-    */
 
 }

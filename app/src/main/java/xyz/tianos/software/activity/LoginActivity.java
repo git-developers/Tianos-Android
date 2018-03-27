@@ -43,7 +43,7 @@ import java.util.List;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
- * A act_4_login screen that offers act_4_login via email/password.
+ * A login screen that offers login via email/password.
  */
 public class LoginActivity extends BaseActivity implements IBase, LoaderCallbacks<Cursor> {
 
@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
             "foo@example.com:hello", "bar@example.com:world"
     };
     /**
-     * Keep track of the act_4_login task to ensure we can cancel it if requested.
+     * Keep track of the login task to ensure we can cancel it if requested.
      */
 //    private UserLoginTask mAuthTask = null;
 
@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_4_login);
+        setContentView(R.layout.login);
         toolBar("Login", R.string.app_name);
         setSharePreferencesActivity(Const.ACTIVITY_LOGIN);
 
@@ -134,9 +134,9 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     }
 
     /**
-     * Attempts to sign in or register the account specified by the act_4_login form.
+     * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual act_4_login attempt is made.
+     * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
 
@@ -148,7 +148,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
         mUsernameView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the act_4_login attempt.
+        // Store values at the time of the login attempt.
         String username = mUsernameView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
 
@@ -179,11 +179,11 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
         }
 
         if (cancel) {
-            // There was an error; don't attempt act_4_login and focus the first
+            // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to perform the user act_4_login attempt.
+            // Show a progress spinner, and kick off a background task to perform the user login attempt.
 
             String registrationId = FirebaseInstanceId.getInstance().getToken();
 

@@ -21,30 +21,18 @@ public class Const {
     public static final String ROUTE_PRODUCT = "product/";
     public static final String ROUTE_CATEGORY = "category/";
     public static final String ROUTE_POINT_OF_SALE = "point-of-sale/";
-//    public static final String ROUTE_LIST_POINT_OF_SALE = API_BASE_ROUTE + "point-of-sale/";
-//    public static final String ROUTE_REPORTS_PIECHART = API_BASE_ROUTE + "reports/piechart";
 
     public static final String CONTENT_TYPE = "application/json";
     public static final String PREFERENCES = "preferences";
 
-    public static final String PARAMETER_USERNAME = "username";
-    public static final String PARAMETER_PASSWORD = "password";
-    public static final String PARAMETER_REGISTRATION_ID = "registration_id";
-
-    public static final String JSON_KEY_USER = "user";
+    public static final String DATA_POINT_OF_SALE = "DATA_POINT_OF_SALE";
 
     public static final int ACTIVITY_LOGIN = 1;
     public static final int ACTIVITY_POINT_OF_SALE = 2;
     public static final int ACTIVITY_CATEGORY = 3;
+    public static final int ACTIVITY_API = 4;
+    public static final int ACTIVITY_START_VISIT = 5;
 
-    public static final String BUNDLE_ROUTE = "route";
-    public static final String BUNDLE_DATE_SELECTED = "date_selected";
-
-    public static final int ROUTE_REPORTS_PIECHART_INT = 1;
-    public static final int ROUTE_REPORTS_STEPPEDAREACHART_INT = 2;
-    public static final int ROUTE_REPORTS_GAUGE_INT = 3;
-
-    public static final String PENDIENTE = "pendiente";
-    public static final String NO_PENDIENTE = "no_pendiente";
+    public static final String DEF_TYPE_DRAWABLE = "drawable";
 
 }

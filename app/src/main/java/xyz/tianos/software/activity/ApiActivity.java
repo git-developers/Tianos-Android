@@ -29,6 +29,7 @@ import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
 import xyz.tianos.software.rxJava.Service.CategoryService;
 import xyz.tianos.software.rxJava.Service.PointOfSaleService;
 import xyz.tianos.software.rxJava.Service.ProductService;
+import xyz.tianos.software.utils.Const;
 
 /**
  * This activity demonstrates how retrofit and rx work together.
@@ -76,6 +77,7 @@ public class ApiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.api);
         toolBar("Api", R.string.app_name);
+        setSharePreferencesActivity(Const.ACTIVITY_API);
 
         initialize();
         onClickListener();
@@ -118,7 +120,7 @@ public class ApiActivity extends BaseActivity {
     private void navigateToPointOfSale()
     {
         Intent intent = new Intent();
-        intent.setClass(this, CategoryActivity.class);
+        intent.setClass(this, PointOfSaleActivity.class);
         startActivity(intent);
         ApiActivity.this.finish();
 
@@ -244,20 +246,5 @@ public class ApiActivity extends BaseActivity {
         mCompositeDisposable.clear();
         super.onDestroy();
     }
-
-//    private void displayPointOfSales(@NonNull final List<PointOfSale> pointOfSales) {
-//        // Cheap way to display a list of Strings - I was too lazy to implement a RecyclerView
-//        final StringBuilder output = new StringBuilder();
-//
-//        output.append(" --------- ").append("\n");
-//
-//        if(pointOfSales != null){
-//            for (final PointOfSale pointOfSale : pointOfSales) {
-//                output.append(pointOfSale.getName()).append("\n");
-//            }
-//        }
-//
-//        mOutputTextView.setText(output.toString());
-//    }
 
 }
