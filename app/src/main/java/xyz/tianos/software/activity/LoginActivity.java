@@ -188,6 +188,8 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
             String registrationId = FirebaseInstanceId.getInstance().getToken();
 
             mProgressBar.setVisibility(View.VISIBLE);
+
+            Utils.hideSoftKeyboard(this);
             requestApiUser(username, password);
         }
     }

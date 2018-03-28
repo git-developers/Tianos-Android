@@ -50,7 +50,7 @@ public class PointOfSaleAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.point_of_sale_adapter_item, null);
+            convertView = layoutInflater.inflate(R.layout.adapter_point_of_sale, null);
 
             holder = new ViewHolder();
             holder.ivThumbnail = (ImageView) convertView.findViewById(R.id.iv_thumbnail);
@@ -61,11 +61,11 @@ public class PointOfSaleAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        PointOfSale pos = this.listData.get(position);
-        holder.tvText.setText(pos.getName());
-        holder.tvId.setText("id: " + pos.getId());
+        PointOfSale object = this.listData.get(position);
+        holder.tvText.setText(object.getName());
+        holder.tvId.setText("id: " + object.getId());
 
-        int imageId = Utils.getResourceIdByName(context, pos.getImage(), Const.DEF_TYPE_DRAWABLE);
+        int imageId = Utils.getResourceIdByName(context, object.getImage(), Const.DEF_TYPE_DRAWABLE);
         holder.ivThumbnail.setImageResource(imageId);
 
         return convertView;

@@ -26,6 +26,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_login_in">Log in</string>
+    <string name="action_send">enviar</string>
     <string name="action_start_visit">iniciar visita</string>
     <string name="error_invalid_email">El email es invalido</string>
     <string name="error_invalid_password">El password es muy corto</string>

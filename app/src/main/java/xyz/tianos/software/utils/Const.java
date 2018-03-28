@@ -32,6 +32,7 @@ public class Const {
     public static final int ACTIVITY_CATEGORY = 3;
     public static final int ACTIVITY_API = 4;
     public static final int ACTIVITY_START_VISIT = 5;
+    public static final int ACTIVITY_PDV_HAS_PRODUCT = 6;
 
     public static final String DEF_TYPE_DRAWABLE = "drawable";
 

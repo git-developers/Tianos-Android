@@ -26,7 +26,7 @@ public class PointOfSaleActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.point_of_sale);
-        toolBar("Puntos de venta 55555", R.string.app_name);
+        toolBar("Puntos de venta", R.string.app_name);
         setSharePreferencesActivity(Const.ACTIVITY_POINT_OF_SALE);
 
         initialize();

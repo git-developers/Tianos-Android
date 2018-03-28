@@ -6,23 +6,27 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-//import com.example.expandablerecyclerview.R;
 
 import xyz.tianos.software.controller.CategoryController;
 import xyz.tianos.software.entity.Category;
 import xyz.tianos.software.expandable.ExpandableUtil;
-import xyz.tianos.software.adapter.ExpandableCategoryAdapter;
+import xyz.tianos.software.adapter.CategoryAdapter;
 import xyz.tianos.software.expandable.listeners.ListItemListener;
-import xyz.tianos.software.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ExpandableCategoryActivity extends BaseActivity implements ListItemListener {
+public class CategoryActivity extends BaseActivity implements ListItemListener {
 
+    @NonNull
     CardView cvContainer;
+
+    @NonNull
     ArrayList<Category> listObject;
-    ExpandableCategoryAdapter placeArrayAdapter;
+
+    @NonNull
+    CategoryAdapter placeArrayAdapter;
+
+    @NonNull
     RecyclerView rvList;
 
     @NonNull
@@ -31,7 +35,7 @@ public class ExpandableCategoryActivity extends BaseActivity implements ListItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.expandable_category);
+        setContentView(R.layout.category);
         toolBar("Categorias", R.string.app_name);
 
         initialize();
@@ -61,7 +65,7 @@ public class ExpandableCategoryActivity extends BaseActivity implements ListItem
 //            listObject.add(object);
 //        }
 
-        placeArrayAdapter = new ExpandableCategoryAdapter(ExpandableCategoryActivity.this, listObject);
+        placeArrayAdapter = new CategoryAdapter(CategoryActivity.this, listObject);
 
         rvList.setAdapter(placeArrayAdapter);
     }

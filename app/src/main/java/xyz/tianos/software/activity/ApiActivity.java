@@ -124,7 +124,6 @@ public class ApiActivity extends BaseActivity {
         startActivity(intent);
         ApiActivity.this.finish();
 
-        /* Apply our act_1_splash exit (fade out) and menu_reports entry (fade in) animation transitions. */
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 

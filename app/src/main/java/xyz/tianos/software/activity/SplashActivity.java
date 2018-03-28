@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import xyz.tianos.software.utils.Const;
-import xyz.tianos.software.utils.Utils;
 
 public class SplashActivity extends BaseActivity {
 
@@ -51,7 +50,7 @@ public class SplashActivity extends BaseActivity {
                     intent.setClass(SplashActivity.this, PointOfSaleActivity.class);
                     break;
                 case Const.ACTIVITY_CATEGORY:
-                    intent.setClass(SplashActivity.this, ExpandableCategoryActivity.class);
+                    intent.setClass(SplashActivity.this, CategoryActivity.class);
                     break;
                 default:
                     intent.setClass(SplashActivity.this, LoginActivity.class);

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import xyz.tianos.software.activity.R;
-import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.entity.Product;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
@@ -19,13 +19,13 @@ import xyz.tianos.software.utils.Utils;
  * Created by jafeth on 3/31/17.
  */
 
-public class ProductAdapter extends BaseAdapter {
+public class PointOfSaleHasProductAdapter extends BaseAdapter {
 
-    private List<PointOfSale> listData;
+    private List<Product> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public ProductAdapter(Context aContext, List<PointOfSale> listData) {
+    public PointOfSaleHasProductAdapter(Context aContext, List<Product> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -50,7 +50,7 @@ public class ProductAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.product_adapter_item, null);
+            convertView = layoutInflater.inflate(R.layout.adapter_product, null);
             
             holder = new ViewHolder();
             holder.ivThumbnail = (ImageView) convertView.findViewById(R.id.iv_thumbnail);
@@ -61,11 +61,11 @@ public class ProductAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        PointOfSale pos = this.listData.get(position);
-        holder.tvText.setText(pos.getName());
-        holder.tvId.setText("id: " + pos.getId());
+        Product object = this.listData.get(position);
+        holder.tvText.setText(object.getName());
+        holder.tvId.setText("id: " + object.getId());
 
-        int imageId = Utils.getResourceIdByName(context, pos.getImage(), Const.DEF_TYPE_DRAWABLE);
+        int imageId = Utils.getResourceIdByName(context, object.getImage(), Const.DEF_TYPE_DRAWABLE);
         holder.ivThumbnail.setImageResource(imageId);
 
         return convertView;
