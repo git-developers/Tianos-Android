@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import xyz.tianos.software.activity.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.plugins.RxJavaPlugins;
 
 //import org.apache.http.HttpResponse;
 //import org.apache.http.client.HttpClient;
@@ -21,8 +22,6 @@ import com.google.gson.JsonParser;
 //import org.apache.http.params.HttpConnectionParams;
 //import org.apache.http.params.HttpParams;
 //import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
 
 /**
  * Created by jafeth on 3/31/17.
@@ -51,6 +50,20 @@ public class Utils {
 
     public static void longToast(Context context, String text) {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+    }
+
+    public static void rxJavaErrorHandler(final Context context, final String text) {
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                throwable.printStackTrace();
+
+                shortToast(context, text);
+            }
+        });
     }
 
     public static void hideSoftKeyboard(Activity activity) {

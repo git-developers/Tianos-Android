@@ -1,16 +1,16 @@
 package xyz.tianos.software.activity;
 
-import android.content.Intent;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,12 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
-//import io.reactivex.annotations.NonNull;
-import android.support.annotation.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import xyz.tianos.software.activity.implement.IBase;
 import xyz.tianos.software.entity.User;
@@ -36,11 +39,7 @@ import xyz.tianos.software.rxJava.Service.UserService;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.google.firebase.iid.FirebaseInstanceId;
+//import io.reactivex.annotations.NonNull;
 
 /**
  * A login screen that offers login via email/password.
@@ -185,12 +184,11 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
         } else {
             // Show a progress spinner, and kick off a background task to perform the user login attempt.
 
-            String registrationId = FirebaseInstanceId.getInstance().getToken();
+//            String registrationId = FirebaseInstanceId.getInstance().getToken();
 
-            mProgressBar.setVisibility(View.VISIBLE);
-
+            showProgressBar();
             Utils.hideSoftKeyboard(this);
-            requestApiUser(username, password);
+            requestApiLogin(username, password);
         }
     }
 
@@ -256,8 +254,22 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
         int IS_PRIMARY = 1;
     }
 
-    private void requestApiUser(String username, String password)
+    private void requestApiLogin(String username, String password)
     {
+
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                throwable.printStackTrace();
+
+                Utils.shortToast(LoginActivity.this, "Info Login: volver a intentar.");
+
+                hideProgressBar();
+            }
+        });
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("username", username);
@@ -276,10 +288,21 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                         return response.user;
                     }
                 })
+//                .onErrorReturn(new Consumer<Throwable, Throwable>() {
+//                    @Override
+//                    public void accept(@io.reactivex.annotations.NonNull final Throwable throwable) throws Exception {
+////                        Utils.shortToast(LoginActivity.this, "Info login: volver a intentar.");
+//                    }
+//                })
+                .doOnError(new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                })
                 .subscribe(new Consumer<User>() {
                     @Override
-                    public void accept(@io.reactivex.annotations.NonNull
-                                       final User object) throws Exception {
+                    public void accept(@io.reactivex.annotations.NonNull final User object) throws Exception {
 
                         if(object != null) {
                             long idInserted = userController.insert(object);
@@ -292,6 +315,16 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                     }
                 })
             );
+    }
+
+    private void showProgressBar()
+    {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar()
+    {
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void navigateToApi()

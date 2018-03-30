@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Tianos</string>
 
+    <string name="google_maps_api_key">AIzaSyBIsK_8F_4dfAyus-2OfcMjOQA2ONc-Hog</string>
+
     <string name="dummy">dummy</string>
     <string name="next">Continuar</string>
     <string name="login_default">abringas@tianos.xyz</string>

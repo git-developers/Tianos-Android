@@ -15,10 +15,6 @@ import xyz.tianos.software.entity.Product;
 import xyz.tianos.software.utils.Const;
 import xyz.tianos.software.utils.Utils;
 
-/**
- * Created by jafeth on 3/31/17.
- */
-
 public class PointOfSaleHasProductAdapter extends BaseAdapter {
 
     private List<Product> listData;
@@ -50,7 +46,7 @@ public class PointOfSaleHasProductAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.adapter_product, null);
+            convertView = layoutInflater.inflate(R.layout.adapter_point_of_sale_has_product, null);
             
             holder = new ViewHolder();
             holder.ivThumbnail = (ImageView) convertView.findViewById(R.id.iv_thumbnail);

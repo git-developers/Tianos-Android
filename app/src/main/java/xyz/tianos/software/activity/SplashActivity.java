@@ -63,7 +63,8 @@ public class SplashActivity extends BaseActivity {
 
 
         //***********JAFETH
-//        intent.setClass(SplashActivity.this, StartVisitActivity.class);
+        intent.setClass(SplashActivity.this, PointOfSaleHasProductActivity.class);
+//        intent.setClass(SplashActivity.this, MapsActivity.class);
 
         startActivity(intent);
         SplashActivity.this.finish();

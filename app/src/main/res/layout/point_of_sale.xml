@@ -34,7 +34,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="60dp"
-        tools:context="com.example.software.activity.teacher.ListActivity">
+        tools:context="com.example.software.activity.teacher.ListActivity"
+        >
 
         <ProgressBar
             android:id="@+id/progress_bar"

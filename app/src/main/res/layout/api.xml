@@ -206,7 +206,7 @@
                 android:background="@drawable/btn_default"
                 android:text="@string/next"
                 android:textAlignment="center"
-                android:textColor="@color/color_white"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:enabled="false"
                 android:clickable="false"

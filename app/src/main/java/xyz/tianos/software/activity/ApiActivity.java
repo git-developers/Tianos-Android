@@ -2,34 +2,36 @@ package xyz.tianos.software.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import java.util.List;
-
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import io.reactivex.disposables.CompositeDisposable;
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import xyz.tianos.software.controller.CategoryController;
+import xyz.tianos.software.controller.PointOfSaleController;
+import xyz.tianos.software.controller.ProductController;
 import xyz.tianos.software.entity.ApiCategory;
 import xyz.tianos.software.entity.PointOfSale;
 import xyz.tianos.software.entity.Product;
 import xyz.tianos.software.rxJava.Response.CategoryResponse;
+import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
 import xyz.tianos.software.rxJava.Response.ProductResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
-import xyz.tianos.software.controller.PointOfSaleController;
-import xyz.tianos.software.controller.ProductController;
-import xyz.tianos.software.rxJava.Response.PointOfSaleResponse;
 import xyz.tianos.software.rxJava.Service.CategoryService;
 import xyz.tianos.software.rxJava.Service.PointOfSaleService;
 import xyz.tianos.software.rxJava.Service.ProductService;
 import xyz.tianos.software.utils.Const;
+import xyz.tianos.software.utils.Utils;
 
 /**
  * This activity demonstrates how retrofit and rx work together.
@@ -127,8 +129,36 @@ public class ApiActivity extends BaseActivity {
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
+    private void navigateToApi()
+    {
+
+        finish();
+        startActivity(getIntent());
+
+//        Intent intent = new Intent();
+//        intent.setClass(this, ApiActivity.class);
+//        startActivity(intent);
+//        ApiActivity.this.finish();
+//
+//        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
     private void requestApiPointOfSale()
     {
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                throwable.printStackTrace();
+
+                Utils.shortToast(ApiActivity.this, "Info PointOfSale: volver a intentar.");
+
+                navigateToApi();
+            }
+        });
+
         mCompositeDisposable
             .add(mPointOfSaleService.queryPointOfSale(44.1)
             .subscribeOn(Schedulers.io()) // "work" on io thread
@@ -141,10 +171,25 @@ public class ApiActivity extends BaseActivity {
                     return response.point_of_sale;
                 }
             })
-            .subscribe(new Consumer<List<PointOfSale>>() {
+//            .doOnError(new Consumer<Throwable>() {
+//                @Override
+//                public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+//                    Utils.shortToast(ApiActivity.this, "Info pdv: volver a intentar.");
+//                }
+//            })
+
+            .doOnError(new Consumer<Throwable>() {
                 @Override
-                public void accept(@io.reactivex.annotations.NonNull
-                                   final List<PointOfSale> objects) throws Exception {
+                public void accept(Throwable throwable) throws Exception {
+                    throwable.printStackTrace();
+
+                    Log.d("ERROR_GATAZO", "SSSSSSSSSSSSSSSSS");
+                }
+            })
+            .subscribe(new Consumer<List<PointOfSale>>() {
+
+                @Override
+                public void accept(@io.reactivex.annotations.NonNull final List<PointOfSale> objects) throws Exception {
 
                     if(objects != null) {
 
@@ -163,6 +208,20 @@ public class ApiActivity extends BaseActivity {
 
     private void requestApiCategory()
     {
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                throwable.printStackTrace();
+
+                Utils.shortToast(ApiActivity.this, "Info Category: volver a intentar.");
+
+                navigateToApi();
+            }
+        });
+
         mCompositeDisposable
             .add(mCategoryService.queryCategory(44.1)
             .subscribeOn(Schedulers.io()) // "work" on io thread
@@ -173,6 +232,12 @@ public class ApiActivity extends BaseActivity {
                                                final CategoryResponse response) throws Exception {
                     // we want to have the geonames and not the wrapper object
                     return response.category;
+                }
+            })
+            .doOnError(new Consumer<Throwable>() {
+                @Override
+                public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                    Utils.shortToast(ApiActivity.this, "Info category: volver a intentar.");
                 }
             })
             .subscribe(new Consumer<List<ApiCategory>>() {
@@ -199,6 +264,20 @@ public class ApiActivity extends BaseActivity {
 
     private void requestApiProduct()
     {
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                throwable.printStackTrace();
+
+                Utils.shortToast(ApiActivity.this, "Info Product: volver a intentar.");
+
+                navigateToApi();
+            }
+        });
+
         mCompositeDisposable
             .add(mProductService.queryProduct(44.1)
             .subscribeOn(Schedulers.io()) // "work" on io thread
@@ -209,6 +288,12 @@ public class ApiActivity extends BaseActivity {
                                                final ProductResponse response) throws Exception {
                     // we want to have the geonames and not the wrapper object
                     return response.product;
+                }
+            })
+            .doOnError(new Consumer<Throwable>() {
+                @Override
+                public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                    Utils.shortToast(ApiActivity.this, "Info producto: volver a intentar.");
                 }
             })
             .subscribe(new Consumer<List<Product>>() {
