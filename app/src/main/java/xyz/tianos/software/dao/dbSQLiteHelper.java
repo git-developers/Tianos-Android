@@ -18,6 +18,7 @@ public class dbSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(dbTables.CREATE_T_USER);
         db.execSQL(dbTables.CREATE_T_PRODUCT);
         db.execSQL(dbTables.CREATE_T_CATEGORY);
+        db.execSQL(dbTables.CREATE_T_BREADCRUMB);
         db.execSQL(dbTables.CREATE_T_POINT_OF_SALE);
     }
 
@@ -25,6 +26,7 @@ public class dbSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(this.DROP_TABLE + dbTables.T_USER);
         db.execSQL(this.DROP_TABLE + dbTables.T_PRODUCT);
         db.execSQL(this.DROP_TABLE + dbTables.T_CATEGORY);
+        db.execSQL(this.DROP_TABLE + dbTables.T_BREADCRUMB);
         db.execSQL(this.DROP_TABLE + dbTables.T_POINT_OF_SALE);
         onCreate(db);
     }

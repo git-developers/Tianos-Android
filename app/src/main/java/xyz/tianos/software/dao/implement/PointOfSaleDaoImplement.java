@@ -22,6 +22,7 @@ public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSal
         values.put(dbTables.USERNAME, username);
         values.put(dbTables.ID, object.getId());
         values.put(dbTables.NAME, object.getName());
+        values.put(dbTables.CODE, object.getCode());
         values.put(dbTables.T_POINT_OF_SALE_LATITUDE, object.getLatitude());
         values.put(dbTables.T_POINT_OF_SALE_LONGITUDE, object.getLongitude());
 
@@ -46,8 +47,9 @@ public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSal
             while (cursor.moveToNext()) {
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
                 object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                object.setLatitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
-                object.setLongitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
+                object.setCode(cursor.getString(cursor.getColumnIndex(dbTables.CODE)));
+                object.setLatitude(cursor.getDouble(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
+                object.setLongitude(cursor.getDouble(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
             }
 
         } finally {
@@ -72,8 +74,9 @@ public class PointOfSaleDaoImplement extends dbConnection implements IPointOfSal
                 PointOfSale object = new PointOfSale();
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
                 object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                object.setLatitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
-                object.setLongitude(cursor.getString(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
+                object.setCode(cursor.getString(cursor.getColumnIndex(dbTables.CODE)));
+                object.setLatitude(cursor.getDouble(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LATITUDE)));
+                object.setLongitude(cursor.getDouble(cursor.getColumnIndex(dbTables.T_POINT_OF_SALE_LONGITUDE)));
                 objects.add(object);
             }
 

@@ -31,7 +31,7 @@ public class ProductDaoImplement extends dbConnection implements IProduct {
 
     public ArrayList<Product> findAll(String username) {
 
-        ArrayList<Product> pointOfSales = new ArrayList();
+        ArrayList<Product> objects = new ArrayList();
         Cursor cursor = null;
 
         try {
@@ -42,7 +42,7 @@ public class ProductDaoImplement extends dbConnection implements IProduct {
                 Product object = new Product();
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
                 object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
-                pointOfSales.add(object);
+                objects.add(object);
             }
 
         } finally {
@@ -51,7 +51,7 @@ public class ProductDaoImplement extends dbConnection implements IProduct {
             }
         }
 
-        return pointOfSales;
+        return objects;
     }
 
     public void deleteTable() {

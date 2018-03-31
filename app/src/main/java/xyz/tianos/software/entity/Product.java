@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
 
-//    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
-
     @SerializedName("id")
     private int id;
 

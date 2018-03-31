@@ -1,19 +1,14 @@
 package xyz.tianos.software.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
-import xyz.tianos.software.activity.startVisit.PagerAdapter;
-import xyz.tianos.software.controller.PointOfSaleController;
-import xyz.tianos.software.entity.PointOfSale;
-import xyz.tianos.software.utils.Const;
-
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+
+import io.reactivex.disposables.CompositeDisposable;
+import xyz.tianos.software.activity.startVisit.PagerAdapter;
+import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.utils.Const;
 
 /**
  * This activity demonstrates how retrofit and rx work together.
@@ -32,9 +27,6 @@ public class StartVisitActivity extends BaseActivity {
 
     private ViewPager viewPager;
 
-    @NonNull
-    protected PointOfSaleController pointOfSaleController;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,12 +44,14 @@ public class StartVisitActivity extends BaseActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.start_visit_tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Visita"));
-        tabLayout.addTab(tabLayout.newTab().setText("Pdv info"));
-        tabLayout.addTab(tabLayout.newTab().setText("Pdv mapa"));
+        tabLayout.addTab(tabLayout.newTab().setText("Info"));
+        tabLayout.addTab(tabLayout.newTab().setText("Mapa"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        pointOfSaleController = new PointOfSaleController(this);
-        PointOfSale pointOfSale = pointOfSaleController.findOneById("1");
+        /**
+         * viene desde activity:: point of sale
+         */
+        PointOfSale pointOfSale = (PointOfSale) getIntent().getSerializableExtra(Const.DATA_POINT_OF_SALE);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(pointOfSale, getSupportFragmentManager(), tabLayout.getTabCount());
@@ -86,45 +80,6 @@ public class StartVisitActivity extends BaseActivity {
             }
         });
 
-    }
-
-    private void startVisit()
-    {
-        requestApiPointOfSale(); // Trigger our request and display afterwards
-    }
-
-    private void requestApiPointOfSale()
-    {
-//        mCompositeDisposable
-//            .add(mPointOfSaleService.queryPointOfSale(44.1)
-//            .subscribeOn(Schedulers.io()) // "work" on io thread
-//            .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
-//            .map(new Function<PointOfSaleResponse, List<PointOfSale>>() {
-//                @Override
-//                public List<PointOfSale> apply(@io.reactivex.annotations.NonNull
-//                                               final PointOfSaleResponse response) throws Exception {
-//                    // we want to have the geonames and not the wrapper object
-//                    return response.point_of_sale;
-//                }
-//            })
-//            .subscribe(new Consumer<List<PointOfSale>>() {
-//                @Override
-//                public void accept(@io.reactivex.annotations.NonNull
-//                                   final List<PointOfSale> objects) throws Exception {
-//
-//                    if(objects != null) {
-//
-//                        pointOfSaleController.deleteTable();
-//                        long idInserted = pointOfSaleController.insertList(username, objects);
-//
-//                        pbPointOfSale.setVisibility(View.GONE);
-//                        ivPointOfSaleOk.setVisibility(View.VISIBLE);
-//
-//                        requestApiCategory();
-//                    }
-//                }
-//            })
-//        );
     }
 
 //    @Override

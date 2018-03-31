@@ -20,6 +20,7 @@ public class Const {
     public static final String ROUTE_LOGIN = "user/login";
     public static final String ROUTE_PRODUCT = "product/";
     public static final String ROUTE_CATEGORY = "category/";
+    public static final String ROUTE_VISIT = "visit/create";
     public static final String ROUTE_POINT_OF_SALE = "point-of-sale/";
 
     public static final String CONTENT_TYPE = "application/json";

@@ -148,9 +148,15 @@ public class ApiActivity extends BaseActivity {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
-                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
-                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+
+                try{
+                    Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                    Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                    Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                }catch (NullPointerException e){
+
+                }
+
                 throwable.printStackTrace();
 
                 Utils.shortToast(ApiActivity.this, "Info PointOfSale: volver a intentar.");
@@ -211,9 +217,15 @@ public class ApiActivity extends BaseActivity {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
-                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
-                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+
+                try{
+                    Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                    Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                    Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                }catch (NullPointerException e){
+
+                }
+
                 throwable.printStackTrace();
 
                 Utils.shortToast(ApiActivity.this, "Info Category: volver a intentar.");
@@ -267,9 +279,15 @@ public class ApiActivity extends BaseActivity {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
-                Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
-                Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+
+                try{
+                    Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                    Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                    Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                }catch (NullPointerException e){
+
+                }
+
                 throwable.printStackTrace();
 
                 Utils.shortToast(ApiActivity.this, "Info Product: volver a intentar.");

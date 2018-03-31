@@ -9,10 +9,6 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-//    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
-//    public static final String INSERT_TYPE_SELECTED_STUDENT = "insert_type_selected_student";
-//    public static final String INSERT_TYPE_CHILDREN = "insert_type_children";
-
     @SerializedName("id")
     private int id;
 

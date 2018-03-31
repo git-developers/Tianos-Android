@@ -10,10 +10,6 @@ import java.io.Serializable;
 
 public class PointOfSale implements Serializable {
 
-//    public static final String INSERT_TYPE_LOGIN = "insert_type_login";
-//    public static final String INSERT_TYPE_SELECTED_STUDENT = "insert_type_selected_student";
-//    public static final String INSERT_TYPE_CHILDREN = "insert_type_children";
-
     @SerializedName("id")
     private int id;
 
@@ -27,10 +23,10 @@ public class PointOfSale implements Serializable {
     private String slug;
 
     @SerializedName("latitude")
-    private String latitude;
+    private double latitude;
 
     @SerializedName("longitude")
-    private String longitude;
+    private double longitude;
 
     @SerializedName("createdAt")
     private String createdAt;
@@ -88,20 +84,32 @@ public class PointOfSale implements Serializable {
         this.slug = slug;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public String getLatitudeStr() {
+        return Double.toString(latitude);
+    }
+
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public String getLongitudeStr() {
+        return Double.toString(longitude);
+    }
+
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getCreatedAt() {

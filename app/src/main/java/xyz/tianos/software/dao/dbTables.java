@@ -8,10 +8,11 @@ public class dbTables {
     public static int DB_VERSION = BuildConfig.VERSION_CODE;
 
     public static String ID = "id";
+    public static String UUID = "uuid";
     public static String NAME = "name";
     public static String CODE = "code";
-    public static String CREATED_AT = "created_at";
     public static String USERNAME = "username";
+    public static String CREATED_AT = "created_at";
 
     public static String T_USER = "t_user";
     public static String T_USER_LAST_NAME = "last_name";
@@ -27,6 +28,25 @@ public class dbTables {
 
     public static String T_PRODUCT = "t_product";
 
+    public static String T_BREADCRUMB = "t_breadcrumb";
+    public static String T_BREADCRUMB_POINTOFSALE_ID = "point_of_sale_id";
+    public static String T_BREADCRUMB_CATEGORY_ID = "category_id";
+
+    public static String T_VISIT = "t_visit";
+    public static String T_VISIT_START = "visit_start";
+    public static String T_VISIT_END = "visit_end";
+    public static String T_VISIT_POINT_OF_SALE = "point_of_sale";
+
+    public static String CREATE_T_VISIT =
+        "CREATE TABLE " + T_VISIT + " (" +
+            USERNAME + " VARCHAR(50)," +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            T_VISIT_START + " VARCHAR(50)," +
+            T_VISIT_END + " VARCHAR(50)," +
+            UUID + " VARCHAR(50)," +
+            T_VISIT_POINT_OF_SALE + " INTEGER(11)," +
+            CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+    ;
 
     public static String CREATE_T_USER =
         "CREATE TABLE " + T_USER + " (" +
@@ -46,8 +66,8 @@ public class dbTables {
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             CODE + " VARCHAR(50)," +
             NAME + " VARCHAR(250)," +
-            T_POINT_OF_SALE_LATITUDE + " VARCHAR(30)," +
-            T_POINT_OF_SALE_LONGITUDE + " VARCHAR(30)," +
+            T_POINT_OF_SALE_LATITUDE + " REAL(30)," +
+            T_POINT_OF_SALE_LONGITUDE + " REAL(30)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 
@@ -67,6 +87,16 @@ public class dbTables {
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             CODE + " VARCHAR(50)," +
             NAME + " VARCHAR(250)," +
+            CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+    ;
+
+    public static String CREATE_T_BREADCRUMB =
+        "CREATE TABLE " + T_BREADCRUMB + " (" +
+            USERNAME + " VARCHAR(50)," +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            UUID + " VARCHAR(50)," +
+            T_BREADCRUMB_POINTOFSALE_ID + " INTEGER(11)," +
+            T_BREADCRUMB_CATEGORY_ID + " INTEGER(11)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 

@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import xyz.tianos.software.adapter.PointOfSaleAdapter;
 import xyz.tianos.software.controller.PointOfSaleController;
 import xyz.tianos.software.entity.PointOfSale;
 import xyz.tianos.software.utils.Const;
-import xyz.tianos.software.utils.Utils;
-
-import java.util.List;
 
 public class PointOfSaleActivity extends BaseActivity {
 
@@ -50,18 +49,19 @@ public class PointOfSaleActivity extends BaseActivity {
                     Object o = listView.getItemAtPosition(position);
                     PointOfSale pointOfSale = (PointOfSale) o;
 
-                    navigateToStartVisit();
+                    navigateToStartVisit(pointOfSale);
                 }
             });
         }
     }
 
-    private void navigateToStartVisit()
+    private void navigateToStartVisit(PointOfSale pointOfSale)
     {
         Intent intent = new Intent();
         intent.setClass(this, StartVisitActivity.class);
+        intent.putExtra(Const.DATA_POINT_OF_SALE, pointOfSale);
         startActivity(intent);
-        PointOfSaleActivity.this.finish();
+//        PointOfSaleActivity.this.finish();
 
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

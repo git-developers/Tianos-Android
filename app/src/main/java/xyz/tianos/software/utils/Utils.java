@@ -10,18 +10,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.UUID;
+
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
-
-//import org.apache.http.HttpResponse;
-//import org.apache.http.client.HttpClient;
-//import org.apache.http.client.methods.HttpPost;
-//import org.apache.http.entity.StringEntity;
-//import org.apache.http.impl.client.DefaultHttpClient;
-//import org.apache.http.params.BasicHttpParams;
-//import org.apache.http.params.HttpConnectionParams;
-//import org.apache.http.params.HttpParams;
-//import org.apache.http.util.EntityUtils;
 
 /**
  * Created by jafeth on 3/31/17.
@@ -37,6 +29,10 @@ public class Utils {
         int resID = context.getResources().getIdentifier(resName , defType, pkgName);
         Log.i("getResourceIdByName", "Res Name: "+ resName+" ==> Res ID= "+ resID);
         return resID;
+    }
+
+    public static String getUuid() {
+        return UUID.randomUUID().toString();
     }
 
     public static void getPackageName(Context context) {
