@@ -11,6 +11,7 @@ public class dbTables {
     public static String UUID = "uuid";
     public static String NAME = "name";
     public static String CODE = "code";
+    public static String SLUG = "slug";
     public static String USERNAME = "username";
     public static String CREATED_AT = "created_at";
 
@@ -18,6 +19,10 @@ public class dbTables {
     public static String T_USER_LAST_NAME = "last_name";
     public static String T_USER_EMAIL = "email";
     public static String T_USER_ROLE = "role";
+
+    public static String T_PROFILE = "t_profile";
+    public static String T_PROFILE_ID = "t_profile_id";
+    public static String T_ROLE = "t_role";
 
     public static String T_POINT_OF_SALE = "t_point_of_sale";
     public static String T_POINT_OF_SALE_LATITUDE = "latitude";
@@ -45,6 +50,26 @@ public class dbTables {
             T_VISIT_END + " VARCHAR(50)," +
             UUID + " VARCHAR(50)," +
             T_VISIT_POINT_OF_SALE + " INTEGER(11)," +
+            CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+    ;
+
+    public static String CREATE_T_PROFILE =
+        "CREATE TABLE " + T_PROFILE + " (" +
+            USERNAME + " VARCHAR(50)," +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            NAME + " VARCHAR(250)," +
+            CODE + " VARCHAR(50)," +
+            CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+    ;
+
+    public static String CREATE_T_ROLE =
+        "CREATE TABLE " + T_ROLE + " (" +
+            USERNAME + " VARCHAR(50)," +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            T_PROFILE_ID + " INTEGER(11)," +
+            NAME + " VARCHAR(250)," +
+            CODE + " VARCHAR(50)," +
+            SLUG + " VARCHAR(200)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 

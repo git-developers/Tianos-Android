@@ -284,6 +284,9 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                     public User apply(@io.reactivex.annotations.NonNull
                                       final UserResponse response) throws Exception {
 
+//                        Log.d("RESPONSE", response);
+
+
                         // we want to have the geonames and not the wrapper object
                         return response.user;
                     }
@@ -306,6 +309,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
                         if(object != null) {
                             long idInserted = userController.insert(object);
+//                            userController.insertProfile(object);
                             navigateToApi();
                         } else {
                             Utils.shortToast(LoginActivity.this, "The user name or password is incorrect.");

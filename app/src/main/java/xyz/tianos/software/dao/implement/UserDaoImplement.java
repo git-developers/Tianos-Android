@@ -3,15 +3,11 @@ package xyz.tianos.software.dao.implement;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import xyz.tianos.software.dao.dbConnection;
 import xyz.tianos.software.dao.dbTables;
 import xyz.tianos.software.dao.interfaces.IUser;
 import xyz.tianos.software.entity.User;
-import xyz.tianos.software.utils.Const;
-
-import java.util.ArrayList;
 
 public class UserDaoImplement extends dbConnection implements IUser {
 
@@ -27,7 +23,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
         values.put(dbTables.NAME, object.getName());
         values.put(dbTables.T_USER_LAST_NAME, object.getLast_name());
         values.put(dbTables.T_USER_EMAIL, object.getEmail());
-        values.put(dbTables.T_USER_ROLE, object.getRole());
+//        values.put(dbTables.T_USER_ROLE, object.getRole());
 //        values.put(dbTables.T_USER_INSERT_TYPE, user.getInsertType());
 //        values.put(dbTables.T_USER_ROLE, user.getProfile().getPermission().getAlias());
 //        Integer.valueOf(usuario.getPrivilegios())

@@ -67,7 +67,7 @@ public class TabFragment1 extends Fragment {
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 navigateToCategory();
-//                saveStartVisit();
+                saveStartVisit();
 //                requestApiStartVisit();
             }
         });
