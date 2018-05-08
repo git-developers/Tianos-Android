@@ -57,8 +57,8 @@ public class dbTables {
         "CREATE TABLE " + T_PROFILE + " (" +
             USERNAME + " VARCHAR(50)," +
             ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            NAME + " VARCHAR(250)," +
             CODE + " VARCHAR(50)," +
+            NAME + " VARCHAR(250)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 

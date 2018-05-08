@@ -32,14 +32,14 @@ public class UserDaoImplement extends dbConnection implements IUser {
 
     @Override
     public User findOneById(String id) {
-        User user = new User();
+        User object = new User();
         Cursor cursor = null;
 
         try {
             cursor = this.getSqliteDb().rawQuery("SELECT * FROM " + dbTables.T_USER + " WHERE id=" + id, null);
             while (cursor.moveToNext()) {
-                user.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
-                user.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
+                object.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
+                object.setName(cursor.getString(cursor.getColumnIndex(dbTables.NAME)));
             }
         } finally {
             if (cursor != null) {
@@ -47,7 +47,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
             }
         }
 
-        return user;
+        return object;
     }
 
     @Override

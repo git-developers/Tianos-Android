@@ -32,6 +32,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import xyz.tianos.software.activity.implement.IBase;
+import xyz.tianos.software.controller.ProfileController;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.rxJava.Response.UserResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
@@ -65,6 +66,8 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
      */
 //    private UserLoginTask mAuthTask = null;
 
+    protected ProfileController profileController;
+
     // UI references.
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
@@ -91,6 +94,8 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     }
 
     private void initialize() {
+
+        profileController = new ProfileController(this);
 
         mCompositeDisposable = new CompositeDisposable();
         mUserService = new RetrofitHelper().getUserService();
@@ -308,7 +313,11 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
                     public void accept(@io.reactivex.annotations.NonNull final User object) throws Exception {
 
                         if(object != null) {
+
                             long idInserted = userController.insert(object);
+
+                            long idInserted2 = profileController.insertByUser(object);
+
 //                            userController.insertProfile(object);
                             navigateToApi();
                         } else {
