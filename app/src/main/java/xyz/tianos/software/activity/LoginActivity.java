@@ -32,7 +32,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import xyz.tianos.software.activity.implement.IBase;
+import xyz.tianos.software.controller.BreadcrumbController;
 import xyz.tianos.software.controller.ProfileController;
+import xyz.tianos.software.controller.RoleController;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.rxJava.Response.UserResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
@@ -67,6 +69,8 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 //    private UserLoginTask mAuthTask = null;
 
     protected ProfileController profileController;
+    protected RoleController roleController;
+    protected BreadcrumbController breadcrumbController;
 
     // UI references.
     private AutoCompleteTextView mUsernameView;
@@ -96,6 +100,8 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     private void initialize() {
 
         profileController = new ProfileController(this);
+        roleController = new RoleController(this);
+        breadcrumbController = new BreadcrumbController(this);
 
         mCompositeDisposable = new CompositeDisposable();
         mUserService = new RetrofitHelper().getUserService();
@@ -316,7 +322,11 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
                             long idInserted = userController.insert(object);
 
-                            long idInserted2 = profileController.insertByUser(object);
+                            long idProfile = profileController.insertOnLogin(object);
+
+                            long idInserted2 = roleController.insertOnLogin(idProfile, object);
+
+                            long idInserted3 = breadcrumbController.save_1_User(object);
 
 //                            userController.insertProfile(object);
                             navigateToApi();

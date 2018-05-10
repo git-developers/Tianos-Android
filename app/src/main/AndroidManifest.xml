@@ -94,7 +94,7 @@
             />
         <activity
             android:label="@string/app_name"
-            android:name=".StartVisitActivity"
+            android:name=".VisitStartActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize"

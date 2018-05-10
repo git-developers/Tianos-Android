@@ -17,7 +17,7 @@ public class ProfileController extends BaseController {
         this.dao = new ProfileDaoImplement(this.context);
     }
 
-    public long insertByUser(User user) {
+    public long insertOnLogin(User user) {
 
         String username = user.getUsername();
         Profile profile = user.getProfile();

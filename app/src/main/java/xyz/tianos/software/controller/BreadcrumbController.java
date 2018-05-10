@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import xyz.tianos.software.dao.implement.BreadcrumbDaoImplement;
 import xyz.tianos.software.entity.Breadcrumb;
+import xyz.tianos.software.entity.Category;
+import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.entity.User;
 
 public class BreadcrumbController extends BaseController {
 
@@ -18,8 +21,20 @@ public class BreadcrumbController extends BaseController {
         this.dao = new BreadcrumbDaoImplement(this.context);
     }
 
-    public long insert(String username, Breadcrumb object) {
-        long idInserted = dao.insert(username, object);
+    public long save_1_User(User object) {
+        long idInserted = dao.save_1_User(object);
+        dao.closeDb();
+        return idInserted;
+    }
+
+    public long save_2_PointOfSale(PointOfSale object) {
+        long idInserted = dao.save_2_PointOfSale(object);
+        dao.closeDb();
+        return idInserted;
+    }
+
+    public long save_3_Category(Category object) {
+        long idInserted = dao.save_3_Category(object);
         dao.closeDb();
         return idInserted;
     }

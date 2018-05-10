@@ -58,7 +58,7 @@ public class PointOfSaleActivity extends BaseActivity {
     private void navigateToStartVisit(PointOfSale pointOfSale)
     {
         Intent intent = new Intent();
-        intent.setClass(this, StartVisitActivity.class);
+        intent.setClass(this, VisitStartActivity.class);
         intent.putExtra(Const.DATA_POINT_OF_SALE, pointOfSale);
         startActivity(intent);
 //        PointOfSaleActivity.this.finish();
