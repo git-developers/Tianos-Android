@@ -65,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<ViewHolder> {
 
                 navigateToPointOfSaleHasProduct();
 
-//                Utils.longToast(context, "id 333: " + object.getId());
+                Utils.longToast(context, "id 333: " + object.getId());
 
                 if (isExpanded) {
                     listItemListener.onCollapse();

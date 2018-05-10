@@ -21,20 +21,14 @@ public class BreadcrumbController extends BaseController {
         this.dao = new BreadcrumbDaoImplement(this.context);
     }
 
-    public long save_1_User(User object) {
-        long idInserted = dao.save_1_User(object);
+    public long insert(Breadcrumb object) {
+        long idInserted = dao.insert(object);
         dao.closeDb();
         return idInserted;
     }
 
-    public long save_2_PointOfSale(PointOfSale object) {
-        long idInserted = dao.save_2_PointOfSale(object);
-        dao.closeDb();
-        return idInserted;
-    }
-
-    public long save_3_Category(Category object) {
-        long idInserted = dao.save_3_Category(object);
+    public long update(Breadcrumb object) {
+        long idInserted = dao.update(object);
         dao.closeDb();
         return idInserted;
     }

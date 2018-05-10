@@ -1,6 +1,7 @@
 package xyz.tianos.software.controller;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -23,12 +24,16 @@ public class RoleController extends BaseController {
 
     public long insertOnLogin(long idProfile, User user) {
 
+        if(idProfile <= 0){
+            return -1;
+        }
+
         String username = user.getUsername();
         ArrayList<Role> roles = user.getProfile().getRole();
 
         long idInserted = 0;
 
-        for (Role role : roles ) {
+        for (Role role : roles) {
             idInserted = dao.insert(username, idProfile, role);
         }
 

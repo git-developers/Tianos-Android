@@ -200,7 +200,7 @@ public class ApiActivity extends BaseActivity {
                     if(objects != null) {
 
                         pointOfSaleController.deleteTable();
-                        long idInserted = pointOfSaleController.insertList(username, objects);
+                        long idInserted = pointOfSaleController.insertList(usernameLastLogged, objects);
 
                         pbPointOfSale.setVisibility(View.GONE);
                         ivPointOfSaleOk.setVisibility(View.VISIBLE);
@@ -262,7 +262,7 @@ public class ApiActivity extends BaseActivity {
                     if(objects != null) {
 
                         categoryController.deleteTable();
-                        long idInserted = categoryController.insertList(username, objects);
+                        long idInserted = categoryController.insertList(usernameLastLogged, objects, 0);
 
                         pbCategory.setVisibility(View.GONE);
                         ivCategoryOk.setVisibility(View.VISIBLE);
@@ -322,7 +322,7 @@ public class ApiActivity extends BaseActivity {
                     if(objects != null) {
 
                         productController.deleteTable();
-                        long idInserted = productController.insertList(username, objects);
+                        long idInserted = productController.insertList(usernameLastLogged, objects);
 
                         pbProduct.setVisibility(View.GONE);
                         ivProductOk.setVisibility(View.VISIBLE);

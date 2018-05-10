@@ -73,7 +73,7 @@ public class RetrofitHelper {
                         .build()
                         ;
 
-                Log.d("GATO", "URL:: " + url);
+                Log.d("TIANOS_OkHttpClient", "URL:: " + url);
 
                 // Request customization: add request headers
                 final Request.Builder requestBuilder = original

@@ -35,6 +35,7 @@ import xyz.tianos.software.activity.implement.IBase;
 import xyz.tianos.software.controller.BreadcrumbController;
 import xyz.tianos.software.controller.ProfileController;
 import xyz.tianos.software.controller.RoleController;
+import xyz.tianos.software.entity.Breadcrumb;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.rxJava.Response.UserResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
@@ -326,9 +327,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
                             long idInserted2 = roleController.insertOnLogin(idProfile, object);
 
-                            long idInserted3 = breadcrumbController.save_1_User(object);
-
-//                            userController.insertProfile(object);
+                            setSharePreferencesIsLogged(Const.USER_IS_LOGGED);
                             navigateToApi();
                         } else {
                             Utils.shortToast(LoginActivity.this, "The user name or password is incorrect.");

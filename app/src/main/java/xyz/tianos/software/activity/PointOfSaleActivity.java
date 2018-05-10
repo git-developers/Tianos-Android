@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -57,6 +58,10 @@ public class PointOfSaleActivity extends BaseActivity {
 
     private void navigateToStartVisit(PointOfSale pointOfSale)
     {
+
+
+        Log.d("POLLO", "pointOfSale 11:: " + pointOfSale.getId());
+
         Intent intent = new Intent();
         intent.setClass(this, VisitStartActivity.class);
         intent.putExtra(Const.DATA_POINT_OF_SALE, pointOfSale);

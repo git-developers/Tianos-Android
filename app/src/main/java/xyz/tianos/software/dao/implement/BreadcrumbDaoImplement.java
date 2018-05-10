@@ -3,6 +3,7 @@ package xyz.tianos.software.dao.implement;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -21,13 +22,13 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
         super(context);
     }
 
-    public long save_1_User(User object) {
+    public long insert(Breadcrumb object) {
         ContentValues values = new ContentValues();
-        values.put(dbTables.USERNAME, object.getUsername());
         values.put(dbTables.UUID, Utils.getUuid());
+        values.put(dbTables.USERNAME, object.getUsername());
+        values.put(dbTables.T_BREADCRUMB_POINTOFSALE_ID, object.getPointOfSaleId());
 
-//        values.put(dbTables.T_BREADCRUMB_POINTOFSALE_ID, object.getPointOfSaleId());
-//        values.put(dbTables.T_BREADCRUMB_CATEGORY_ID, object.getCategoryId());
+        Log.d("GATO", "getUsername::: " + object.getUsername());
 
         return this
                 .getSqliteDb()
@@ -35,18 +36,27 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
                 ;
     }
 
-    public long save_2_PointOfSale(PointOfSale object) {
+    public long update(Breadcrumb object) {
 
-        Breadcrumb breadcrumb = findLast();
-
+        Breadcrumb bc = findLast();
 
         ContentValues values = new ContentValues();
-        values.put(dbTables.T_BREADCRUMB_POINTOFSALE_ID, object.getId());
-//        values.put(dbTables.T_BREADCRUMB_CATEGORY_ID, object.getCategoryId());
+
+/*        if(bc.getUuid() != null){
+            values.put(dbTables.UUID, Utils.getUuid());
+        }
+
+        if(bc.getPointOfSaleId() > 0){
+            values.put(dbTables.T_BREADCRUMB_POINTOFSALE_ID, object.getId());
+        }*/
+
+        if(bc.getCategoryId() > 0){
+            values.put(dbTables.T_BREADCRUMB_CATEGORY_ID, object.getCategoryId());
+        }
 
         return this
                 .getSqliteDb()
-                .insert(dbTables.T_BREADCRUMB, null, values)
+                .update(dbTables.T_BREADCRUMB, values, "username='" + bc.getUsername() + "'",null)
                 ;
     }
 
@@ -102,8 +112,8 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
             cursor = this.getSqliteDb()
                     .rawQuery("SELECT * " +
                             " FROM " + dbTables.T_BREADCRUMB +
-                            " ORDER BY " + dbTables.ID +
-                            " DESC LIMIT 1", null);
+                            " ORDER BY " + dbTables.ID + " DESC " +
+                            " LIMIT 1", null);
 
             while (cursor.moveToNext()) {
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));

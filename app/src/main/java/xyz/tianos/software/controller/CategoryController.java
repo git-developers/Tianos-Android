@@ -1,6 +1,8 @@
 package xyz.tianos.software.controller;
 
 import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class CategoryController extends BaseController {
         this.dao = new CategoryDaoImplement(this.context);
     }
 
-    public long insertList(String username, List<ApiCategory> objects) {
+    public long insertList(String username, List<ApiCategory> objects, int parentId) {
 
         long idInserted = 0;
 
@@ -31,11 +33,12 @@ public class CategoryController extends BaseController {
 //            Log.d(TAG, "PARENT::::: CODE:: " + parent.getId() + "--NAME:: " + parent.getName());
 
             if(children.size() > 0) {
-//                Log.d(TAG, "CHILDREN::::: :: " + parent.getId());
-                parent.setCategoryId(parent.getId());
-                insertList(username, children);
+//                Log.d(TAG, "CHILDREN::::: :: " + parentId);
+
+                insertList(username, children, parent.getId());
             }
 
+            parent.setCategoryId(parentId);
             idInserted = dao.insert(username, parent);
         }
 

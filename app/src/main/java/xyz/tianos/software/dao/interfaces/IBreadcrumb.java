@@ -5,6 +5,6 @@ import xyz.tianos.software.entity.User;
 
 public interface IBreadcrumb {
 
-    public long save_1_User(User object);
+    public long insert(Breadcrumb object);
     public Breadcrumb findLast();
 }

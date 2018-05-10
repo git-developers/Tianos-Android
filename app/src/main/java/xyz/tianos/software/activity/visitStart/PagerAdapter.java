@@ -9,20 +9,22 @@ import xyz.tianos.software.activity.visitStart.tab.TabFragment1;
 import xyz.tianos.software.activity.visitStart.tab.TabFragment2;
 import xyz.tianos.software.activity.visitStart.tab.TabFragment3;
 import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.entity.User;
 import xyz.tianos.software.utils.Const;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
-    private Bundle bundlePointOfSale;
+    private Bundle bundle;
 
-    public PagerAdapter(PointOfSale pointOfSale, FragmentManager fm, int NumOfTabs) {
+    public PagerAdapter(User userLastLogged, PointOfSale pointOfSale, FragmentManager fm, int NumOfTabs) {
         super(fm);
 
         this.mNumOfTabs = NumOfTabs;
 
-        bundlePointOfSale = new Bundle();
-        bundlePointOfSale.putSerializable(Const.DATA_POINT_OF_SALE, pointOfSale);
+        bundle = new Bundle();
+        bundle.putSerializable(Const.DATA_USER, userLastLogged);
+        bundle.putSerializable(Const.DATA_POINT_OF_SALE, pointOfSale);
     }
 
     @Override
@@ -32,17 +34,17 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 0:
 
                 TabFragment1 tab1 = new TabFragment1();
-                tab1.setArguments(bundlePointOfSale);
+                tab1.setArguments(bundle);
 
                 return tab1;
             case 1:
                 TabFragment2 tab2 = new TabFragment2();
-                tab2.setArguments(bundlePointOfSale);
+                tab2.setArguments(bundle);
 
                 return tab2;
             case 2:
                 TabFragment3 tab3 = new TabFragment3();
-                tab3.setArguments(bundlePointOfSale);
+                tab3.setArguments(bundle);
 
                 return tab3;
             default:

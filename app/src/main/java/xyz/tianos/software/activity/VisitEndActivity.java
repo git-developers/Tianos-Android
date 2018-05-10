@@ -54,7 +54,7 @@ public class VisitEndActivity extends BaseActivity {
         PointOfSale pointOfSale = (PointOfSale) getIntent().getSerializableExtra(Const.DATA_POINT_OF_SALE);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(pointOfSale, getSupportFragmentManager(), tabLayout.getTabCount());
+        final PagerAdapter adapter = new PagerAdapter(userLastLogged, pointOfSale, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
     }

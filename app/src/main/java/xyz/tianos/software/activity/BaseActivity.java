@@ -42,8 +42,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private TextView tvUserName, tvUserEmail;
     private View llnavigationView;
     protected UserController userController;
-    public User user;
-    public String username;
+    public User userLastLogged;
+    public String usernameLastLogged;
     public Toolbar toolbar;
 
     @Override
@@ -66,15 +66,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     private void initialize() {
         this.sharedpreferences = getSharedPreferences(Const.PREFERENCES, 0);
         userController = new UserController(this);
-        user = userController.findLastLogged();
-        username = user.getUsername();
+        userLastLogged = userController.findLastLogged();
+        usernameLastLogged = userLastLogged.getUsername();
     }
 
     public Toolbar toolBar(String title, int subtitle) {
 
         try{
             Resources res = getResources();
-            String subtitleTxt = res.getString(subtitle, username, 1);
+            String subtitleTxt = res.getString(subtitle, usernameLastLogged, 1);
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
@@ -117,8 +117,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
             tvUserName = (TextView) llnavigationView.findViewById(R.id.tvUserName);
             tvUserEmail = (TextView) llnavigationView.findViewById(R.id.tvUserEmail);
-            tvUserName.setText(user.getName());
-            tvUserEmail.setText(user.getEmail());
+            tvUserName.setText(userLastLogged.getName());
+            tvUserEmail.setText(userLastLogged.getEmail());
         }catch (NullPointerException e){
             e.printStackTrace();
         }

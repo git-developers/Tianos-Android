@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
         Intent intent = new Intent();
         boolean isLogged = getSharePreferencesIsLogged();
 
-        if(user != null && isLogged){
+        if(userLastLogged != null && isLogged){
 
             int activity = getSharePreferencesActivity();
 

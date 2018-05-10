@@ -23,10 +23,7 @@ public class UserDaoImplement extends dbConnection implements IUser {
         values.put(dbTables.NAME, object.getName());
         values.put(dbTables.T_USER_LAST_NAME, object.getLast_name());
         values.put(dbTables.T_USER_EMAIL, object.getEmail());
-//        values.put(dbTables.T_USER_ROLE, object.getRole());
-//        values.put(dbTables.T_USER_INSERT_TYPE, user.getInsertType());
-//        values.put(dbTables.T_USER_ROLE, user.getProfile().getPermission().getAlias());
-//        Integer.valueOf(usuario.getPrivilegios())
+
         return this.getSqliteDb().insert(dbTables.T_USER, null, values);
     }
 

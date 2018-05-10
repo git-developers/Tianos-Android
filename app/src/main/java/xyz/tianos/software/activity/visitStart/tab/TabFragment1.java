@@ -21,8 +21,11 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import xyz.tianos.software.activity.CategoryActivity;
 import xyz.tianos.software.activity.R;
+import xyz.tianos.software.controller.BreadcrumbController;
 import xyz.tianos.software.controller.VisitController;
+import xyz.tianos.software.entity.Breadcrumb;
 import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.entity.User;
 import xyz.tianos.software.entity.Visit;
 import xyz.tianos.software.rxJava.Response.VisitResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
@@ -36,6 +39,11 @@ public class TabFragment1 extends Fragment {
     private static final String TAG = TabFragment1.class.getSimpleName();
     protected Button bNext;
 
+    protected VisitController visitController;
+    protected BreadcrumbController breadcrumbController;
+    protected User userLastLogged;
+    protected PointOfSale pointOfSale;
+
     /**
      * Collects all subscriptions to unsubscribe later
      */
@@ -48,14 +56,17 @@ public class TabFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        visitController = new VisitController(getActivity());
+        breadcrumbController = new BreadcrumbController(getActivity());
         mCompositeDisposable = new CompositeDisposable();
-
-        // Initialize the city endpoint
         mVisitService = new RetrofitHelper().getVisitService();
 
-        View view = inflater.inflate(R.layout.start_visit_tab_1, container, false);
+        userLastLogged = (User) getArguments().getSerializable(Const.DATA_USER);
+        pointOfSale = (PointOfSale) getArguments().getSerializable(Const.DATA_POINT_OF_SALE);
 
-        PointOfSale pointOfSale = (PointOfSale) getArguments().getSerializable(Const.DATA_POINT_OF_SALE);
+        Log.d("POLLO", "pointOfSale 33:: " + pointOfSale.getId());
+
+        View view = inflater.inflate(R.layout.start_visit_tab_1, container, false);
 
         TextView tab1PdvName = (TextView) view.findViewById(R.id.tab_pdv_name);
         tab1PdvName.setText(pointOfSale.getId() + " - " + pointOfSale.getName());
@@ -66,7 +77,7 @@ public class TabFragment1 extends Fragment {
         bNext = (Button) view.findViewById(R.id.b_start_visit);
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startBreadcrumb();
+                updateBreadcrumb();
                 navigateToCategory();
                 saveStartVisit();
 //                requestApiStartVisit();
@@ -82,8 +93,7 @@ public class TabFragment1 extends Fragment {
         object.setUuid(Utils.getUuid());
         object.setVisitStart(Date.now());
 
-        VisitController controller = new VisitController(getActivity());
-        long idInserted = controller.insert(object);
+        long idInserted = visitController.insert(object);
     }
 
     private void requestApiStartVisit()
@@ -153,12 +163,16 @@ public class TabFragment1 extends Fragment {
 //        this.context.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
-    private void startBreadcrumb()
+    private void updateBreadcrumb()
     {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), CategoryActivity.class);
-        startActivity(intent);
-//        context.finish();
-//        this.context.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        Log.d("POLLO", "pointOfSale.getId:: " + pointOfSale.getId() );
+
+        Breadcrumb object = new Breadcrumb();
+        object.setUsername(userLastLogged.getUsername());
+        object.setPointOfSaleId(pointOfSale.getId());
+
+        long idInserted = breadcrumbController.insert(object);
+
     }
 }

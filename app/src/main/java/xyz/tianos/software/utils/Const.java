@@ -10,6 +10,9 @@ public class Const {
     public static final int STATUS_WARNING = 2;
     public static final int STATUS_ERROR = 3;
 
+    public static final boolean USER_IS_LOGGED = true;
+    public static final boolean USER_IS_NOT_LOGGED = false;
+
     public static final int VERSION = 3;
     public static final int HTTP_STATUS_200 = 200;
     public static final int SOCKET_TIMEOUT = 4000;
@@ -26,6 +29,7 @@ public class Const {
     public static final String CONTENT_TYPE = "application/json";
     public static final String PREFERENCES = "preferences";
 
+    public static final String DATA_USER = "DATA_USER";
     public static final String DATA_POINT_OF_SALE = "DATA_POINT_OF_SALE";
 
     public static final int ACTIVITY_LOGIN = 1;

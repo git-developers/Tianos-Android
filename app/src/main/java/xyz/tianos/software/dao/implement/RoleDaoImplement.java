@@ -25,6 +25,7 @@ public class RoleDaoImplement extends dbConnection implements IRole {
         values.put(dbTables.ID, object.getId());
         values.put(dbTables.CODE, object.getCode());
         values.put(dbTables.NAME, object.getName());
+        values.put(dbTables.SLUG, object.getSlug());
 
         return this.getSqliteDb().insert(dbTables.T_ROLE, null, values);
     }

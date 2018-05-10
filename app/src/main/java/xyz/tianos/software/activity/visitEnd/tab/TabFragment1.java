@@ -69,23 +69,13 @@ public class TabFragment1 extends Fragment {
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 navigateToCategory();
-                save_2_PointOfSale(pointOfSale);
+//                save_2_PointOfSale(pointOfSale);
                 saveVisitStart();
 //                requestApiStartVisit();
             }
         });
 
         return view;
-    }
-
-    private void save_2_PointOfSale(PointOfSale pointOfSale)
-    {
-        Visit object = new Visit();
-        object.setUuid(Utils.getUuid());
-        object.setVisitStart(Date.now());
-
-        BreadcrumbController controller = new BreadcrumbController(getActivity());
-        long idInserted = controller.save_2_PointOfSale(pointOfSale);
     }
 
 
