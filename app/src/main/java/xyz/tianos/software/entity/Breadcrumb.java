@@ -12,14 +12,15 @@ public class Breadcrumb implements Serializable {
     @SerializedName("username")
     private String username;
 
-    @SerializedName("uuid")
     private String uuid;
 
-    @SerializedName("pointOfSaleId")
     private int pointOfSaleId;
 
-    @SerializedName("categoryId")
     private int categoryId;
+
+    private PointOfSale pointOfSale;
+
+    private Category category;
 
     public int getId() {
         return id;
@@ -59,6 +60,22 @@ public class Breadcrumb implements Serializable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public PointOfSale getPointOfSale() {
+        return pointOfSale;
+    }
+
+    public void setPointOfSale(PointOfSale pointOfSale) {
+        this.pointOfSale = pointOfSale;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

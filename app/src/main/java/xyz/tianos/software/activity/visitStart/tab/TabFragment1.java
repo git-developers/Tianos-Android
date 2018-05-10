@@ -64,8 +64,6 @@ public class TabFragment1 extends Fragment {
         userLastLogged = (User) getArguments().getSerializable(Const.DATA_USER);
         pointOfSale = (PointOfSale) getArguments().getSerializable(Const.DATA_POINT_OF_SALE);
 
-        Log.d("POLLO", "pointOfSale 33:: " + pointOfSale.getId());
-
         View view = inflater.inflate(R.layout.start_visit_tab_1, container, false);
 
         TextView tab1PdvName = (TextView) view.findViewById(R.id.tab_pdv_name);
@@ -77,20 +75,31 @@ public class TabFragment1 extends Fragment {
         bNext = (Button) view.findViewById(R.id.b_start_visit);
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                updateBreadcrumb();
+                saveBreadcrumb();
+                saveVisitStart();
+                requestApiStartVisit();
                 navigateToCategory();
-                saveStartVisit();
-//                requestApiStartVisit();
             }
         });
 
         return view;
     }
 
-    private void saveStartVisit()
+    private void saveBreadcrumb()
+    {
+        Breadcrumb object = new Breadcrumb();
+        object.setUsername(userLastLogged.getUsername());
+        object.setPointOfSaleId(pointOfSale.getId());
+
+        long idInserted = breadcrumbController.insert(object);
+    }
+
+    private void saveVisitStart()
     {
         Visit object = new Visit();
         object.setUuid(Utils.getUuid());
+        object.setUsername(userLastLogged.getUsername());
+        object.setPointOfSale(pointOfSale.getId());
         object.setVisitStart(Date.now());
 
         long idInserted = visitController.insert(object);
@@ -163,16 +172,4 @@ public class TabFragment1 extends Fragment {
 //        this.context.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
-    private void updateBreadcrumb()
-    {
-
-        Log.d("POLLO", "pointOfSale.getId:: " + pointOfSale.getId() );
-
-        Breadcrumb object = new Breadcrumb();
-        object.setUsername(userLastLogged.getUsername());
-        object.setPointOfSaleId(pointOfSale.getId());
-
-        long idInserted = breadcrumbController.insert(object);
-
-    }
 }

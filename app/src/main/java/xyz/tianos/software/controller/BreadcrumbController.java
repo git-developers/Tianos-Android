@@ -40,6 +40,13 @@ public class BreadcrumbController extends BaseController {
         return objects;
     }
 
+    public Breadcrumb findLast() {
+        Breadcrumb object = dao.findLast();
+        dao.closeDb();
+
+        return object;
+    }
+
     public void deleteTable() {
         dao.deleteTable();
         dao.closeDb();

@@ -54,7 +54,7 @@ public class VisitStartActivity extends BaseActivity {
          */
         PointOfSale pointOfSale = (PointOfSale) getIntent().getSerializableExtra(Const.DATA_POINT_OF_SALE);
 
-        Log.d("POLLO", "pointOfSale 22:: " + pointOfSale.getId());
+//        Log.d("POLLO", "pointOfSale 22:: " + pointOfSale.getId());
 
 
         viewPager = (ViewPager) findViewById(R.id.pager);

@@ -38,8 +38,6 @@ public class TabFragment2 extends Fragment {
         TextView pdvLongitude = (TextView) view.findViewById(R.id.tab_pdv_longitude);
         pdvLongitude.setText(pointOfSale.getLongitudeStr());
 
-        Log.d(TAG, "POLLO::: " + pointOfSale.getName());
-
         return view;
     }
 }

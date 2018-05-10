@@ -59,9 +59,6 @@ public class PointOfSaleActivity extends BaseActivity {
     private void navigateToStartVisit(PointOfSale pointOfSale)
     {
 
-
-        Log.d("POLLO", "pointOfSale 11:: " + pointOfSale.getId());
-
         Intent intent = new Intent();
         intent.setClass(this, VisitStartActivity.class);
         intent.putExtra(Const.DATA_POINT_OF_SALE, pointOfSale);

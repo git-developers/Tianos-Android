@@ -57,7 +57,7 @@
                             android:text="punto venta"
                             android:padding="3dip" />
                         <TextView
-                            android:id="@+id/tab1_pdv_name"
+                            android:id="@+id/tableTv_pdv_name"
                             android:text="2222222222"
                             android:gravity="right"
                             android:padding="3dip" />
@@ -68,6 +68,7 @@
                             android:text="category"
                             android:padding="3dip" />
                         <TextView
+                            android:id="@+id/tableTv_category_name"
                             android:text="4444444444444"
                             android:gravity="right"
                             android:padding="3dip" />

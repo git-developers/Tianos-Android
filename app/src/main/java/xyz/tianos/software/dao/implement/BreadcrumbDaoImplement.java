@@ -28,8 +28,6 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
         values.put(dbTables.USERNAME, object.getUsername());
         values.put(dbTables.T_BREADCRUMB_POINTOFSALE_ID, object.getPointOfSaleId());
 
-        Log.d("GATO", "getUsername::: " + object.getUsername());
-
         return this
                 .getSqliteDb()
                 .insert(dbTables.T_BREADCRUMB, null, values)
@@ -57,16 +55,6 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
         return this
                 .getSqliteDb()
                 .update(dbTables.T_BREADCRUMB, values, "username='" + bc.getUsername() + "'",null)
-                ;
-    }
-
-    public long save_3_Category(Category object) {
-        ContentValues values = new ContentValues();
-        values.put(dbTables.T_BREADCRUMB_CATEGORY_ID, object.getId());
-
-        return this
-                .getSqliteDb()
-                .insert(dbTables.T_BREADCRUMB, null, values)
                 ;
     }
 
@@ -110,17 +98,40 @@ public class BreadcrumbDaoImplement extends dbConnection implements IBreadcrumb 
         try {
 
             cursor = this.getSqliteDb()
-                    .rawQuery("SELECT * " +
-                            " FROM " + dbTables.T_BREADCRUMB +
-                            " ORDER BY " + dbTables.ID + " DESC " +
+                    .rawQuery("SELECT " +
+                            "t1.id, " +
+                            "t1.username, " +
+                            "t1.uuid, " +
+                            "t1.point_of_sale_id, " +
+                            "t1.category_id, " +
+
+                            "t2.id pdv_id, " +
+                            "t2.name pdv_name, " +
+
+                            "t3.id category_obj_id, " +
+                            "t3.name category_obj_name " +
+
+                            " FROM " + dbTables.T_BREADCRUMB + " AS t1 " +
+                            " LEFT JOIN " + dbTables.T_POINT_OF_SALE + " AS t2 on t2.id = t1.point_of_sale_id " +
+                            " LEFT JOIN " + dbTables.T_CATEGORY + " AS t3 on t3.id = t1.category_id " +
+                            " ORDER BY t1." + dbTables.ID + " DESC " +
                             " LIMIT 1", null);
 
             while (cursor.moveToNext()) {
+
                 object.setId(cursor.getInt(cursor.getColumnIndex(dbTables.ID)));
-                object.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
                 object.setUuid(cursor.getString(cursor.getColumnIndex(dbTables.UUID)));
-                object.setPointOfSaleId(cursor.getInt(cursor.getColumnIndex(dbTables.T_BREADCRUMB_POINTOFSALE_ID)));
-                object.setCategoryId(cursor.getInt(cursor.getColumnIndex(dbTables.T_BREADCRUMB_CATEGORY_ID)));
+                object.setUsername(cursor.getString(cursor.getColumnIndex(dbTables.USERNAME)));
+
+                PointOfSale pointOfSale = new PointOfSale();
+                pointOfSale.setId( cursor.getInt(cursor.getColumnIndex("pdv_id")) );
+                pointOfSale.setName( cursor.getString(cursor.getColumnIndex("pdv_name")) );
+                object.setPointOfSale(pointOfSale);
+
+                Category category = new Category();
+                category.setId( cursor.getInt(cursor.getColumnIndex("category_obj_id")) );
+                category.setName( cursor.getString(cursor.getColumnIndex("category_obj_name")) );
+                object.setCategory(category);
             }
 
         } finally {
