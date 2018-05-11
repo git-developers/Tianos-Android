@@ -82,6 +82,9 @@ public class RetrofitHelper {
                         ;
 
                 final Request request = requestBuilder.build();
+
+                Log.d("TIANOS_OkHttpClient", "REQUEST:: " + request);
+
                 return chain.proceed(request);
             }
         });

@@ -1,9 +1,14 @@
 package xyz.tianos.software.rxJava.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import io.reactivex.Single;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import xyz.tianos.software.entity.Visit;
 import xyz.tianos.software.rxJava.Response.VisitResponse;
 import xyz.tianos.software.utils.Const;
 
@@ -19,8 +24,12 @@ public interface VisitService {
     @POST(Const.ROUTE_VISIT)
     @FormUrlEncoded
     Single<VisitResponse> queryVisit(
-            @Field("north") double north
+//            @Field("north") double north
+//        @Body ArrayList<Visit> visits
+        @Body HashMap<String, ArrayList<Visit>> body
     );
+
+//    A
 
     /*
 

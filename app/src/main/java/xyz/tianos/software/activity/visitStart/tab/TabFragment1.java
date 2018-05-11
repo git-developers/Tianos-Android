@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -107,6 +109,32 @@ public class TabFragment1 extends Fragment {
 
     private void requestApiStartVisit()
     {
+
+        /*
+        {
+            "visits":
+            [
+                {
+                  "username":"5abec9f7a1971",
+                  "pointOfSale":"10",
+                  "visitStart":"2018-03-29 19:12:22",
+                  "visitEnd":"2018-03-30 21:12:22",
+                  "uuid":"www"
+                },
+                {
+                  "username":"5abec9f7a1971",
+                  "pointOfSale":"10",
+                  "visitStart":"2018-03-29 19:12:38",
+                  "visitEnd":"2018-03-30 21:12:38",
+                  "uuid":"sss"
+                }
+            ]
+        }
+         */
+
+
+
+
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
@@ -123,8 +151,13 @@ public class TabFragment1 extends Fragment {
             }
         });
 
+        ArrayList<Visit> visits = visitController.findAll(userLastLogged.getUsername());
+
+        HashMap<String, ArrayList<Visit>> map = new HashMap<String, ArrayList<Visit>>();
+        map.put("visits", visits);
+
         mCompositeDisposable
-            .add(mVisitService.queryVisit(44.1)
+            .add(mVisitService.queryVisit(map)
                 .subscribeOn(Schedulers.io()) // "work" on io thread
                 .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
                 .map(new Function<VisitResponse, List<Visit>>() {

@@ -89,6 +89,8 @@ public class TabFragment1 extends Fragment {
         long idInserted = controller.insert(object);
     }
 
+
+    /*
     private void requestApiStartVisit()
     {
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
@@ -106,6 +108,7 @@ public class TabFragment1 extends Fragment {
                 throwable.printStackTrace();
             }
         });
+
 
         mCompositeDisposable
                 .add(mVisitService.queryVisit(44.1)
@@ -146,6 +149,9 @@ public class TabFragment1 extends Fragment {
                     })
                 );
     }
+
+    */
+
 
 
     private void navigateToCategory()
