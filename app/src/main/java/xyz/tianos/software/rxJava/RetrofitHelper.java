@@ -96,6 +96,11 @@ public class RetrofitHelper {
      * Creates a pre configured Retrofit instance
      */
     private Retrofit createTianosRetrofit() {
+
+
+//        EJEMPLO
+//        https://github.com/codepath/android_guides/wiki/Consuming-APIs-with-Retrofit
+
         return new Retrofit
                 .Builder()
                 .baseUrl(Const.API_BASE_ROUTE)

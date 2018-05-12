@@ -24,7 +24,7 @@ public class VisitDaoImplement extends dbConnection implements IVisit {
         values.put(dbTables.UUID, Utils.getUuid());
         values.put(dbTables.T_VISIT_START, object.getVisitStart());
         values.put(dbTables.T_VISIT_END, object.getVisitEnd());
-        values.put(dbTables.T_VISIT_POINT_OF_SALE, object.getPointOfSale());
+        values.put(dbTables.T_VISIT_POINT_OF_SALE, object.getPointOfSaleId());
 
         return this
                 .getSqliteDb()
@@ -53,7 +53,7 @@ public class VisitDaoImplement extends dbConnection implements IVisit {
                 object.setUuid(cursor.getString(cursor.getColumnIndex(dbTables.UUID)));
                 object.setVisitStart(cursor.getString(cursor.getColumnIndex(dbTables.T_VISIT_START)));
                 object.setVisitEnd(cursor.getString(cursor.getColumnIndex(dbTables.T_VISIT_END)));
-                object.setPointOfSale(cursor.getInt(cursor.getColumnIndex(dbTables.T_VISIT_POINT_OF_SALE)));
+                object.setPointOfSaleId(cursor.getInt(cursor.getColumnIndex(dbTables.T_VISIT_POINT_OF_SALE)));
                 objects.add(object);
             }
 

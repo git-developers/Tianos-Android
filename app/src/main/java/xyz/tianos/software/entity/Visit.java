@@ -16,17 +16,17 @@ public class Visit implements Serializable {
     @SerializedName("username")
     private String username;
 
-    @SerializedName("visit_start")
+    @SerializedName("visitStart")
     private String visitStart;
 
-    @SerializedName("visit_end")
+    @SerializedName("visitEnd")
     private String visitEnd;
 
     @SerializedName("uuid")
     private String uuid;
 
-    @SerializedName("point_of_sale")
-    private int pointOfSale;
+    @SerializedName("pointOfSale")
+    private int pointOfSaleId;
 
     public int getId() {
         return id;
@@ -68,12 +68,16 @@ public class Visit implements Serializable {
         this.uuid = uuid;
     }
 
-    public int getPointOfSale() {
-        return pointOfSale;
+    public int getPointOfSaleId() {
+        return pointOfSaleId;
     }
 
-    public void setPointOfSale(int pointOfSale) {
-        this.pointOfSale = pointOfSale;
+    public String getPointOfSaleIdStr() {
+        return String.valueOf(pointOfSaleId);
+    }
+
+    public void setPointOfSaleId(int pointOfSaleId) {
+        this.pointOfSaleId = pointOfSaleId;
     }
 
     @Override

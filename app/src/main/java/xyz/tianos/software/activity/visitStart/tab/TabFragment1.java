@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,6 +27,7 @@ import xyz.tianos.software.activity.R;
 import xyz.tianos.software.controller.BreadcrumbController;
 import xyz.tianos.software.controller.VisitController;
 import xyz.tianos.software.entity.Breadcrumb;
+import xyz.tianos.software.entity.ListVisit;
 import xyz.tianos.software.entity.PointOfSale;
 import xyz.tianos.software.entity.User;
 import xyz.tianos.software.entity.Visit;
@@ -101,7 +103,7 @@ public class TabFragment1 extends Fragment {
         Visit object = new Visit();
         object.setUuid(Utils.getUuid());
         object.setUsername(userLastLogged.getUsername());
-        object.setPointOfSale(pointOfSale.getId());
+        object.setPointOfSaleId(pointOfSale.getId());
         object.setVisitStart(Date.now());
 
         long idInserted = visitController.insert(object);
@@ -132,9 +134,7 @@ public class TabFragment1 extends Fragment {
         }
          */
 
-
-
-
+                
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
@@ -152,12 +152,11 @@ public class TabFragment1 extends Fragment {
         });
 
         ArrayList<Visit> visits = visitController.findAll(userLastLogged.getUsername());
-
-        HashMap<String, ArrayList<Visit>> map = new HashMap<String, ArrayList<Visit>>();
-        map.put("visits", visits);
+        ListVisit listVisit = new ListVisit();
+        listVisit.setListVisit(visits);
 
         mCompositeDisposable
-            .add(mVisitService.queryVisit(map)
+            .add(mVisitService.queryVisit(listVisit)
                 .subscribeOn(Schedulers.io()) // "work" on io thread
                 .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
                 .map(new Function<VisitResponse, List<Visit>>() {
@@ -179,7 +178,7 @@ public class TabFragment1 extends Fragment {
                     public void accept(Throwable throwable) throws Exception {
                         throwable.printStackTrace();
 
-                        Log.d("ERROR_GATAZO", "SSSSSSSSSSSSSSSSS");
+                        Log.d("ERROR_RETROFIT", "SSSSS");
                     }
                 })
                 .subscribe(new Consumer<List<Visit>>() {

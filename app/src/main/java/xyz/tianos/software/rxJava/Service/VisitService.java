@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import xyz.tianos.software.entity.ListVisit;
 import xyz.tianos.software.entity.Visit;
 import xyz.tianos.software.rxJava.Response.VisitResponse;
 import xyz.tianos.software.utils.Const;
@@ -22,14 +23,14 @@ public interface VisitService {
      * @param north    bounding box north
      */
     @POST(Const.ROUTE_VISIT)
-    @FormUrlEncoded
+//    @FormUrlEncoded
     Single<VisitResponse> queryVisit(
-//            @Field("north") double north
-//        @Body ArrayList<Visit> visits
-        @Body HashMap<String, ArrayList<Visit>> body
+        @Body ListVisit visits
     );
 
-//    A
+
+
+
 
     /*
 
