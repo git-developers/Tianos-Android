@@ -19,17 +19,20 @@ public class Const {
     public static final String IS_LOGGED = "is_logged";
     public static final String LAST_ACTIVITY = "last_activity";
 
-    public static final String API_BASE_ROUTE = "http://tianos.xyz/api/";
+    public static final String API_BASE_ROUTE = "http://elcomercio-circulacion.press/api/";
     public static final String ROUTE_LOGIN = "user/login";
     public static final String ROUTE_PRODUCT = "product/";
     public static final String ROUTE_CATEGORY = "category/";
-    public static final String ROUTE_VISIT = "visit/create";
+    public static final String ROUTE_VISIT_START = "visit/start";
+    public static final String ROUTE_VISIT_END = "visit/end";
     public static final String ROUTE_POINT_OF_SALE = "point-of-sale/";
+    public static final String ROUTE_POINT_OF_SALE_HAS_PRODUCT = "pdv-has-product/create";
 
     public static final String CONTENT_TYPE = "application/json";
     public static final String PREFERENCES = "preferences";
 
     public static final String DATA_USER = "DATA_USER";
+    public static final String DATA_VISIT = "DATA_VISIT";
     public static final String DATA_POINT_OF_SALE = "DATA_POINT_OF_SALE";
 
     public static final int ACTIVITY_LOGIN = 1;

@@ -53,7 +53,7 @@
             android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_marginTop="50dp"
             android:background="@drawable/btn_success"
-            android:text="@string/action_start_visit"
+            android:text="@string/action_visit_start"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold" />

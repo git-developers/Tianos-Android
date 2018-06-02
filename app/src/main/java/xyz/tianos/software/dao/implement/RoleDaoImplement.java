@@ -22,7 +22,7 @@ public class RoleDaoImplement extends dbConnection implements IRole {
         ContentValues values = new ContentValues();
         values.put(dbTables.USERNAME, username);
         values.put(dbTables.T_PROFILE_ID, idProfile);
-        values.put(dbTables.ID, object.getId());
+//        values.put(dbTables.ID, object.getId());
         values.put(dbTables.CODE, object.getCode());
         values.put(dbTables.NAME, object.getName());
         values.put(dbTables.SLUG, object.getSlug());
@@ -77,6 +77,13 @@ public class RoleDaoImplement extends dbConnection implements IRole {
 
     public void deleteTable() {
         deleteTable(dbTables.T_ROLE);
+    }
+
+    public int deleteTableByUsername(String username) {
+        return this
+                .getSqliteDb()
+                .delete(dbTables.T_ROLE,"username=?",new String[]{username})
+                ;
     }
 
 }

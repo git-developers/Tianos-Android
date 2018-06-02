@@ -19,7 +19,7 @@ public class TabFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.start_visit_tab_2, container, false);
+        View view = inflater.inflate(R.layout.end_visit_tab_2, container, false);
 
         PointOfSale pointOfSale = (PointOfSale) getArguments().getSerializable(Const.DATA_POINT_OF_SALE);
 

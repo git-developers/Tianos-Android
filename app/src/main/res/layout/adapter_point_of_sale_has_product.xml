@@ -92,7 +92,7 @@
             <!--android:background="@color/primary_border"-->
 
             <EditText
-                android:id="@+id/plain_text_input"
+                android:id="@+id/et_cantidad_producto"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:inputType="number"/>

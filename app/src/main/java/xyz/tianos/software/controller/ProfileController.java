@@ -44,4 +44,8 @@ public class ProfileController extends BaseController {
         dao.closeDb();
     }
 
+    public void deleteTableByUsername(String username) {
+        dao.deleteTableByUsername(username);
+        dao.closeDb();
+    }
 }

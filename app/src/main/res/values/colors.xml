@@ -4,8 +4,10 @@
     <color name="gray2">#D9D9D9</color>
     <color name="white">#ffffff</color>
     <color name="black">#343434</color>
-    <color name="primary">#ff9d01</color>
-    <color name="primary_dark">#F2801D</color>
+    <color name="primary">#FFC404</color>
+    <!--<color name="primary">#ff9d01</color>-->
+    <color name="primary_dark">#E2A900</color>
+    <!--<color name="primary_dark">#F2801D</color>-->
     <color name="accent">#ff4081</color>
 
     <color name="default_bg">#ffffff</color>

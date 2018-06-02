@@ -58,7 +58,7 @@
                             android:padding="3dip" />
                         <TextView
                             android:id="@+id/tableTv_pdv_name"
-                            android:text="2222222222"
+                            android:text="@string/dummy"
                             android:gravity="right"
                             android:padding="3dip" />
                     </TableRow>
@@ -69,7 +69,7 @@
                             android:padding="3dip" />
                         <TextView
                             android:id="@+id/tableTv_category_name"
-                            android:text="4444444444444"
+                            android:text="@string/dummy"
                             android:gravity="right"
                             android:padding="3dip" />
                     </TableRow>
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/btn_success"
-                    android:text="@string/action_send"
+                    android:text="@string/action_register"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textStyle="bold" />

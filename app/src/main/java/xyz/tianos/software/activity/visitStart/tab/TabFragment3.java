@@ -55,9 +55,9 @@ public class TabFragment3 extends Fragment implements OnMapReadyCallback {
         String namePdv = pointOfSale.getName();
 
         // Add a marker and move the camera.
-        LatLng sydney = new LatLng(this.latitude, this.longitude);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("PDV:: " + namePdv));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng latLng = new LatLng(this.latitude, this.longitude);
+        googleMap.addMarker(new MarkerOptions().position(latLng).title("PDV:: " + namePdv));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     private boolean checkPermission() {

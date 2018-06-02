@@ -13,10 +13,12 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.tianos.software.rxJava.Service.CategoryService;
+import xyz.tianos.software.rxJava.Service.PdvHasProductService;
 import xyz.tianos.software.rxJava.Service.PointOfSaleService;
 import xyz.tianos.software.rxJava.Service.ProductService;
 import xyz.tianos.software.rxJava.Service.UserService;
-import xyz.tianos.software.rxJava.Service.VisitService;
+import xyz.tianos.software.rxJava.Service.VisitEndService;
+import xyz.tianos.software.rxJava.Service.VisitStartService;
 import xyz.tianos.software.utils.Const;
 
 /**
@@ -48,9 +50,19 @@ public class RetrofitHelper {
         return retrofit.create(UserService.class);
     }
 
-    public VisitService getVisitService() {
+    public VisitStartService getVisitStartService() {
         final Retrofit retrofit = createTianosRetrofit();
-        return retrofit.create(VisitService.class);
+        return retrofit.create(VisitStartService.class);
+    }
+
+    public VisitEndService getVisitEndService() {
+        final Retrofit retrofit = createTianosRetrofit();
+        return retrofit.create(VisitEndService.class);
+    }
+
+    public PdvHasProductService getPdvHasProductService() {
+        final Retrofit retrofit = createTianosRetrofit();
+        return retrofit.create(PdvHasProductService.class);
     }
 
     /**

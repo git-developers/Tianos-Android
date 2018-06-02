@@ -19,16 +19,20 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
-import xyz.tianos.software.activity.CategoryActivity;
+import xyz.tianos.software.activity.PointOfSaleActivity;
 import xyz.tianos.software.activity.R;
 import xyz.tianos.software.controller.BreadcrumbController;
 import xyz.tianos.software.controller.VisitController;
+import xyz.tianos.software.entity.Breadcrumb;
+import xyz.tianos.software.entity.ListVisit;
 import xyz.tianos.software.entity.PointOfSale;
+import xyz.tianos.software.entity.User;
 import xyz.tianos.software.entity.Visit;
-import xyz.tianos.software.rxJava.Response.VisitResponse;
+import xyz.tianos.software.rxJava.Response.VisitEndResponse;
+import xyz.tianos.software.rxJava.Response.VisitStartResponse;
 import xyz.tianos.software.rxJava.RetrofitHelper;
-import xyz.tianos.software.rxJava.Service.VisitService;
-import xyz.tianos.software.utils.Const;
+import xyz.tianos.software.rxJava.Service.VisitEndService;
+import xyz.tianos.software.rxJava.Service.VisitStartService;
 import xyz.tianos.software.utils.Date;
 import xyz.tianos.software.utils.Utils;
 
@@ -36,7 +40,13 @@ public class TabFragment1 extends Fragment {
 
     private static final String TAG = TabFragment1.class.getSimpleName();
     protected Button bNext;
+    protected BreadcrumbController breadcrumbController;
+    protected VisitController visitController;
+
+    protected User userLastLogged;
     protected PointOfSale pointOfSale;
+    protected Visit visit;
+    protected Breadcrumb breadcrumb;
 
     /**
      * Collects all subscriptions to unsubscribe later
@@ -45,33 +55,31 @@ public class TabFragment1 extends Fragment {
     private CompositeDisposable mCompositeDisposable;
 
     @NonNull
-    private VisitService mVisitService;
+    private VisitEndService mVisitService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mCompositeDisposable = new CompositeDisposable();
+        visitController = new VisitController(getActivity());
+        breadcrumbController = new BreadcrumbController(getActivity());
+        breadcrumb = breadcrumbController.findLast();
 
-        // Initialize the city endpoint
-        mVisitService = new RetrofitHelper().getVisitService();
-
-        View view = inflater.inflate(R.layout.start_visit_tab_1, container, false);
-
-        pointOfSale = (PointOfSale) getArguments().getSerializable(Const.DATA_POINT_OF_SALE);
+        View view = inflater.inflate(R.layout.end_visit_tab_1, container, false);
 
         TextView tab1PdvName = (TextView) view.findViewById(R.id.tab_pdv_name);
-        tab1PdvName.setText(pointOfSale.getId() + " - " + pointOfSale.getName());
+        tab1PdvName.setText(breadcrumb.getPointOfSale().getId() + " - " + breadcrumb.getPointOfSale().getName());
 
         TextView tab1PdvCode = (TextView) view.findViewById(R.id.tab_pdv_code);
-        tab1PdvCode.setText(pointOfSale.getCode());
+        tab1PdvCode.setText(breadcrumb.getPointOfSale().getCode());
 
-        bNext = (Button) view.findViewById(R.id.b_start_visit);
+        bNext = (Button) view.findViewById(R.id.b_end_visit);
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                navigateToCategory();
-//                save_2_PointOfSale(pointOfSale);
-                saveVisitStart();
-//                requestApiStartVisit();
+
+                saveVisitEnd();
+                requestApiVisitEnd();
+                navigateToPointOfSale();
+
             }
         });
 
@@ -79,28 +87,26 @@ public class TabFragment1 extends Fragment {
     }
 
 
-    private void saveVisitStart()
+    private void saveVisitEnd()
     {
-        Visit object = new Visit();
-        object.setUuid(Utils.getUuid());
-        object.setVisitStart(Date.now());
 
-        VisitController controller = new VisitController(getActivity());
-        long idInserted = controller.insert(object);
+        Visit object = visitController.findLast();
+        object.setVisitEnd(Date.now());
+
+        long idInserted = visitController.updateVisitEnd(object);
     }
 
-
-    /*
-    private void requestApiStartVisit()
+    private void requestApiVisitEnd()
     {
+
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
 
                 try{
-                    Log.e("GATAZO_LOGIN_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
-                    Log.e("GATAZO_LOGIN_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
-                    Log.e("GATAZO_LOGIN_XX", throwable.getMessage());                     // "Test"
+                    Log.e("GATAZO_VISIT_START_XX", throwable.getClass().getName());             // io.reactivex.exceptions.OnErrorNotImplementedException
+                    Log.e("GATAZO_VISIT_START_XX", throwable.getCause().getClass().getName());  // java.lang.Exception
+                    Log.e("GATAZO_VISIT_START_XX", throwable.getMessage());                     // "Test"
                 }catch (NullPointerException e){
 
                 }
@@ -109,55 +115,59 @@ public class TabFragment1 extends Fragment {
             }
         });
 
+        ListVisit listVisit = visitController.findAllListEnd(breadcrumb.getUsername());
+
+//        for (Visit visit : listVisit.getListVisit()) {
+//            Log.d("VISITAS_ENVIADAS", "ID:::: " + visit.getId());
+//        }
+
+        mCompositeDisposable = new CompositeDisposable();
+        mVisitService = new RetrofitHelper().getVisitEndService();
 
         mCompositeDisposable
-                .add(mVisitService.queryVisit(44.1)
-                    .subscribeOn(Schedulers.io()) // "work" on io thread
-                    .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
-                    .map(new Function<VisitResponse, List<Visit>>() {
-                        @Override
-                        public List<Visit> apply(@io.reactivex.annotations.NonNull
-                                                       final VisitResponse response) throws Exception {
-                            // we want to have the geonames and not the wrapper object
-                            return response.visit;
-                        }
-                    })
-//            .doOnError(new Consumer<Throwable>() {
-//                @Override
-//                public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
-//                    Utils.shortToast(ApiActivity.this, "Info pdv: volver a intentar.");
-//                }
-//            })
-                    .doOnError(new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Exception {
-                            throwable.printStackTrace();
+            .add(mVisitService.queryVisit(listVisit)
+                .subscribeOn(Schedulers.io()) // "work" on io thread
+                .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
+                .map(new Function<VisitEndResponse, List<Visit>>() {
+                    @Override
+                    public List<Visit> apply(@io.reactivex.annotations.NonNull final VisitEndResponse response) throws Exception {
+                        // we want to have the geonames and not the wrapper object
+                        return response.visits;
+                    }
+                })
+                .doOnError(new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
 
-                            Log.d("ERROR_GATAZO", "SSSSSSSSSSSSSSSSS");
-                        }
-                    })
-                    .subscribe(new Consumer<List<Visit>>() {
+                        Log.d("ERROR_RETROFIT", "SSSSS");
+                    }
+                })
+                .subscribe(new Consumer<List<Visit>>() {
 
-                        @Override
-                        public void accept(@io.reactivex.annotations.NonNull final List<Visit> objects) throws Exception {
+                    @Override
+                    public void accept(@io.reactivex.annotations.NonNull final List<Visit> objects) throws Exception {
 
-                            if(objects != null) {
+                        if(objects != null) {
 
-                                Utils.shortToast(getActivity(), "Visita: se envio correctamente.");
+                            for (Visit visit : objects){
+
+                                Visit sqlite = visitController.findOneByUuid(visit.getUuid());
+                                sqlite.setIdBackend(visit.getIdBackend());
+                                visitController.updateIdBackendEnd(sqlite);
                             }
+
+                            Utils.shortToast(getActivity(), "Visita: se envio correctamente.");
                         }
-                    })
-                );
+                    }
+                })
+            );
     }
 
-    */
-
-
-
-    private void navigateToCategory()
+    private void navigateToPointOfSale()
     {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), CategoryActivity.class);
+        intent.setClass(getActivity(), PointOfSaleActivity.class);
         startActivity(intent);
 //        context.finish();
 //        this.context.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

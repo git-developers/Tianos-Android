@@ -20,7 +20,7 @@ public class ProfileDaoImplement extends dbConnection implements IProfile {
 
         ContentValues values = new ContentValues();
         values.put(dbTables.USERNAME, username);
-        values.put(dbTables.ID, object.getId());
+//        values.put(dbTables.ID, object.getId());
         values.put(dbTables.CODE, object.getCode());
         values.put(dbTables.NAME, object.getName());
         return this.getSqliteDb().insert(dbTables.T_PROFILE, null, values);
@@ -75,4 +75,11 @@ public class ProfileDaoImplement extends dbConnection implements IProfile {
         deleteTable(dbTables.T_PROFILE);
     }
 
+    public int deleteTableByUsername(String username) {
+
+        return this
+                .getSqliteDb()
+                .delete(dbTables.T_PROFILE,"username=?",new String[]{username})
+                ;
+    }
 }

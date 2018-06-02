@@ -28,7 +28,7 @@ public class Product implements Serializable {
     @SerializedName("image")
     private String image;
 
-//    private Attendance attendance;
+    private int cantidadProduct;
 
     public Product() {
 
@@ -82,6 +82,15 @@ public class Product implements Serializable {
 //        }
 //
 //    }
+
+
+    public int getCantidadProduct() {
+        return cantidadProduct;
+    }
+
+    public void setCantidadProduct(int cantidadProduct) {
+        this.cantidadProduct = cantidadProduct;
+    }
 
     @Override
     public String toString() {

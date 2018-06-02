@@ -101,4 +101,11 @@ public class UserDaoImplement extends dbConnection implements IUser {
         deleteTable(dbTables.T_USER);
     }
 
+    public int deleteTableByUsername(String username) {
+        return this
+                .getSqliteDb()
+                .delete(dbTables.T_USER,"username=?",new String[]{username})
+                ;
+    }
+
 }

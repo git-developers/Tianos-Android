@@ -47,4 +47,9 @@ public class UserController extends BaseController {
         dao.closeDb();
     }
 
+    public void deleteTableByUsername(String username) {
+        dao.deleteTableByUsername(username);
+        dao.closeDb();
+    }
+
 }

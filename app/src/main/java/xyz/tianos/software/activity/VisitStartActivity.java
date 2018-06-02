@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import io.reactivex.disposables.CompositeDisposable;
-import xyz.tianos.software.activity.visitStart.PagerAdapter;
+import xyz.tianos.software.activity.visitStart.PagerStartVisitAdapter;
 import xyz.tianos.software.entity.PointOfSale;
 import xyz.tianos.software.utils.Const;
 
@@ -58,7 +57,7 @@ public class VisitStartActivity extends BaseActivity {
 
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(userLastLogged, pointOfSale, getSupportFragmentManager(), tabLayout.getTabCount());
+        final PagerStartVisitAdapter adapter = new PagerStartVisitAdapter(userLastLogged, pointOfSale, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
     }

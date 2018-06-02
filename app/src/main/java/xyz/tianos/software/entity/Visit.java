@@ -28,6 +28,9 @@ public class Visit implements Serializable {
     @SerializedName("pointOfSale")
     private int pointOfSaleId;
 
+    @SerializedName("id_backend")
+    private int idBackend;
+
     public int getId() {
         return id;
     }
@@ -78,6 +81,14 @@ public class Visit implements Serializable {
 
     public void setPointOfSaleId(int pointOfSaleId) {
         this.pointOfSaleId = pointOfSaleId;
+    }
+
+    public int getIdBackend() {
+        return idBackend;
+    }
+
+    public void setIdBackend(int idBackend) {
+        this.idBackend = idBackend;
     }
 
     @Override

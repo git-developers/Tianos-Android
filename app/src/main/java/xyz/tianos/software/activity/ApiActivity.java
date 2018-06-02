@@ -206,6 +206,8 @@ public class ApiActivity extends BaseActivity {
                         ivPointOfSaleOk.setVisibility(View.VISIBLE);
 
                         requestApiCategory();
+                    } else {
+                        Utils.shortToast(ApiActivity.this, "PDV: volver a intentar.");
                     }
                 }
             })
@@ -268,6 +270,8 @@ public class ApiActivity extends BaseActivity {
                         ivCategoryOk.setVisibility(View.VISIBLE);
 
                         requestApiProduct();
+                    } else {
+                        Utils.shortToast(ApiActivity.this, "Category: volver a intentar.");
                     }
                 }
             })
@@ -328,6 +332,8 @@ public class ApiActivity extends BaseActivity {
                         ivProductOk.setVisibility(View.VISIBLE);
 
                         enableNextButton();
+                    } else {
+                        Utils.shortToast(ApiActivity.this, "Product: volver a intentar.");
                     }
                 }
             })

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -50,13 +49,13 @@ public class PointOfSaleActivity extends BaseActivity {
                     Object o = listView.getItemAtPosition(position);
                     PointOfSale pointOfSale = (PointOfSale) o;
 
-                    navigateToStartVisit(pointOfSale);
+                    navigateToVisitStart(pointOfSale);
                 }
             });
         }
     }
 
-    private void navigateToStartVisit(PointOfSale pointOfSale)
+    private void navigateToVisitStart(PointOfSale pointOfSale)
     {
 
         Intent intent = new Intent();

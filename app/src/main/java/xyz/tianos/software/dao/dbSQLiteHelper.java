@@ -23,6 +23,7 @@ public class dbSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(dbTables.CREATE_T_CATEGORY);
         db.execSQL(dbTables.CREATE_T_BREADCRUMB);
         db.execSQL(dbTables.CREATE_T_POINT_OF_SALE);
+        db.execSQL(dbTables.CREATE_T_PDV_HAS_PRODUCT);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -33,6 +34,7 @@ public class dbSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(this.DROP_TABLE + dbTables.T_CATEGORY);
         db.execSQL(this.DROP_TABLE + dbTables.T_BREADCRUMB);
         db.execSQL(this.DROP_TABLE + dbTables.T_POINT_OF_SALE);
+        db.execSQL(this.DROP_TABLE + dbTables.T_PDV_HAS_PRODUCT);
         onCreate(db);
     }
 }

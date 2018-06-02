@@ -232,6 +232,7 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         List<String> emails = new ArrayList<>();
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
             cursor.moveToNext();
@@ -321,10 +322,13 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
 
                         if(object != null) {
 
+                            userController.deleteTableByUsername(object.getUsername());
                             long idInserted = userController.insert(object);
 
+                            profileController.deleteTableByUsername(object.getUsername());
                             long idProfile = profileController.insertOnLogin(object);
 
+                            roleController.deleteTableByUsername(object.getUsername());
                             long idInserted2 = roleController.insertOnLogin(idProfile, object);
 
                             setSharePreferencesIsLogged(Const.USER_IS_LOGGED);

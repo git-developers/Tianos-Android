@@ -57,14 +57,6 @@ public class CategoryActivity extends BaseActivity implements ListItemListener {
 
         listObject = categoryController.findAll("username");
 
-//        listObject = new ArrayList<>();
-//
-//        for (int i=0; i<6; i++) {
-//            Category object = new Category();
-//            object.setName("POLLO-" + i);
-//            listObject.add(object);
-//        }
-
         placeArrayAdapter = new CategoryAdapter(CategoryActivity.this, listObject);
 
         rvList.setAdapter(placeArrayAdapter);

@@ -13,6 +13,7 @@ public class dbTables {
     public static String CODE = "code";
     public static String SLUG = "slug";
     public static String USERNAME = "username";
+    public static String ID_BACKEND = "id_backend";
     public static String CREATED_AT = "created_at";
 
     public static String T_USER = "t_user";
@@ -25,6 +26,7 @@ public class dbTables {
     public static String T_ROLE = "t_role";
 
     public static String T_POINT_OF_SALE = "t_point_of_sale";
+    public static String T_POINT_OF_SALE_ID = "point_of_sale_id";
     public static String T_POINT_OF_SALE_LATITUDE = "latitude";
     public static String T_POINT_OF_SALE_LONGITUDE = "longitude";
 
@@ -32,6 +34,7 @@ public class dbTables {
     public static String T_CATEGORY_CATEGORY_ID = "category_id";
 
     public static String T_PRODUCT = "t_product";
+    public static String T_PRODUCT_ID = "product_id";
 
     public static String T_BREADCRUMB = "t_breadcrumb";
     public static String T_BREADCRUMB_POINTOFSALE_ID = "point_of_sale_id";
@@ -41,6 +44,11 @@ public class dbTables {
     public static String T_VISIT_START = "visit_start";
     public static String T_VISIT_END = "visit_end";
     public static String T_VISIT_POINT_OF_SALE = "point_of_sale";
+    public static String T_VISIT_ID_BACKEND_START = "id_backend_start";
+    public static String T_VISIT_ID_BACKEND_END = "id_backend_end";
+
+    public static String T_PDV_HAS_PRODUCT = "t_pdv_has_product";
+    public static String T_PDV_HAS_PRODUCT_CANTIDAD_PRODUCT = "cantidad_producto";
 
     public static String CREATE_T_VISIT =
         "CREATE TABLE " + T_VISIT + " (" +
@@ -50,6 +58,8 @@ public class dbTables {
             T_VISIT_END + " VARCHAR(50)," +
             UUID + " VARCHAR(50)," +
             T_VISIT_POINT_OF_SALE + " INTEGER(11)," +
+            T_VISIT_ID_BACKEND_START + " INTEGER(11)," +
+            T_VISIT_ID_BACKEND_END + " INTEGER(11)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 
@@ -122,6 +132,18 @@ public class dbTables {
             UUID + " VARCHAR(50)," +
             T_BREADCRUMB_POINTOFSALE_ID + " INTEGER(11)," +
             T_BREADCRUMB_CATEGORY_ID + " INTEGER(11)," +
+            CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
+    ;
+
+    public static String CREATE_T_PDV_HAS_PRODUCT =
+        "CREATE TABLE " + T_PDV_HAS_PRODUCT + " (" +
+            USERNAME + " VARCHAR(50)," +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            UUID + " VARCHAR(50)," +
+            T_POINT_OF_SALE_ID + " INTEGER(11)," +
+            T_PRODUCT_ID + " INTEGER(11)," +
+            T_PDV_HAS_PRODUCT_CANTIDAD_PRODUCT + " INTEGER(11)," +
+            ID_BACKEND + " INTEGER(11)," +
             CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
     ;
 
