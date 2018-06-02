@@ -47,6 +47,7 @@
             android:id="@+id/end_visit_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primary"
             android:elevation="6dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             />
@@ -59,7 +60,7 @@
             android:layout_height="fill_parent"
              />
 
-        <!--android:background="@color/accent"-->
+        <!---->
         <!--android:minHeight="?attr/actionBarSize"-->
         <!--android:layout_below="@id/start_visit_tab_layout"-->
 

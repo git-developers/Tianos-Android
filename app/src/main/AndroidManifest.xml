@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="xyz.tianos.software.activity">
+    package="xyz.elcomercio.software.activity">
 
     <!-- To auto-complete the email text field in loginogin form with the user's emails -->
     <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
@@ -24,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="xyz.tianos.software.TianosApp">
+        android:name="xyz.elcomercio.software.TianosApp">
 
         <!--
              The API key for Google Maps-based APIs.
