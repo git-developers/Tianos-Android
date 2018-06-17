@@ -284,12 +284,12 @@ public class LoginActivity extends BaseActivity implements IBase, LoaderCallback
             }
         });
 
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("username", username);
-        map.put("password", password);
+        HashMap<String, String> loginMap = new HashMap<String, String>();
+        loginMap.put("username", username);
+        loginMap.put("password", password);
 
         mCompositeDisposable
-            .add(mUserService.queryLogin(map)
+            .add(mUserService.queryLogin(loginMap)
                 .subscribeOn(Schedulers.io()) // "work" on io thread
                 .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
                 .map(new Function<UserResponse, User>() {

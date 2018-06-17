@@ -5,6 +5,7 @@
 
     <string name="dummy">dummy</string>
     <string name="next">Continuar</string>
+    <string name="try_again">Volver a Intentar</string>
     <string name="login_default">"@elcomercio.pe"</string>
     <string name="point_of_sale">Puntos de venta</string>
     <string name="submit">Enviar</string>

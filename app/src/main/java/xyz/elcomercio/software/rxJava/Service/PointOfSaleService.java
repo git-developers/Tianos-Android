@@ -1,6 +1,9 @@
 package xyz.elcomercio.software.rxJava.Service;
 
+import java.util.HashMap;
+
 import io.reactivex.Single;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -19,9 +22,9 @@ public interface PointOfSaleService {
      * @param north    bounding box north
      */
     @POST(Const.ROUTE_POINT_OF_SALE)
-    @FormUrlEncoded
+//    @FormUrlEncoded
     Single<PointOfSaleResponse> queryPointOfSale (
-        @Field("north") double north
+        @Body HashMap<String, String> body
     );
 
     /*

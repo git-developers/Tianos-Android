@@ -189,11 +189,11 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-
         <LinearLayout
+            android:id="@+id/ll_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="250dp"
             android:orientation="horizontal" >
 
             <Button
@@ -211,7 +211,29 @@
                 android:enabled="false"
                 android:clickable="false"
                 />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_next"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/b_try_again"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@drawable/btn_default"
+                android:text="@string/try_again"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:clickable="false"
+                />
         </LinearLayout>
 
     </RelativeLayout>

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,7 +66,7 @@ public class ApiActivity extends BaseActivity {
     protected ImageView ivPointOfSaleOk, ivCategoryOk, ivProductOk;
 
     @NonNull
-    protected Button bNext;
+    protected Button bNext, bTryAgain;
 
     /**
      * Collects all subscriptions to unsubscribe later
@@ -108,6 +109,7 @@ public class ApiActivity extends BaseActivity {
         ivPointOfSaleOk = (ImageView) findViewById(R.id.iv_point_of_sale_ok);
 
         bNext = (Button) findViewById(R.id.b_next);
+        bTryAgain = (Button) findViewById(R.id.b_try_again);
     }
 
     private void onClickListener()
@@ -115,6 +117,12 @@ public class ApiActivity extends BaseActivity {
         bNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 navigateToPointOfSale();
+            }
+        });
+
+        bTryAgain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                navigateToApi();
             }
         });
     }
@@ -161,12 +169,15 @@ public class ApiActivity extends BaseActivity {
 
                 Utils.shortToast(ApiActivity.this, "Info PointOfSale: volver a intentar.");
 
-                navigateToApi();
+                enableTryAgainButton();
             }
         });
 
+        HashMap<String, String> pdvMap = new HashMap<String, String>();
+        pdvMap.put("username", usernameLastLogged);
+
         mCompositeDisposable
-            .add(mPointOfSaleService.queryPointOfSale(44.1)
+            .add(mPointOfSaleService.queryPointOfSale(pdvMap)
             .subscribeOn(Schedulers.io()) // "work" on io thread
             .observeOn(AndroidSchedulers.mainThread()) // "listen" on UIThread
             .map(new Function<PointOfSaleResponse, List<PointOfSale>>() {
@@ -232,7 +243,7 @@ public class ApiActivity extends BaseActivity {
 
                 Utils.shortToast(ApiActivity.this, "Info Category: volver a intentar.");
 
-                navigateToApi();
+                enableTryAgainButton();
             }
         });
 
@@ -296,7 +307,7 @@ public class ApiActivity extends BaseActivity {
 
                 Utils.shortToast(ApiActivity.this, "Info Product: volver a intentar.");
 
-                navigateToApi();
+                enableTryAgainButton();
             }
         });
 
@@ -338,6 +349,13 @@ public class ApiActivity extends BaseActivity {
                 }
             })
         );
+    }
+
+    private void enableTryAgainButton()
+    {
+        bTryAgain.setEnabled(true);
+        bTryAgain.setClickable(true);
+        bTryAgain.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_warning));
     }
 
     private void enableNextButton()
